@@ -39,14 +39,14 @@
     <a th:href="@{/form}" class="btn btn-secondary">Registrar Cliente</a>
     <table class="table text-center">
         <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Editar</th>
-                </tr>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Editar</th>
+            </tr>
         </thead>
         <tbody>
             <tr th:each="cliente: ${clientes}">
@@ -56,7 +56,8 @@
                 <td th:text="${cliente.Email}"></td>
                 <td th:text="${cliente.CreateAt}"></td>
                 <td><a class="btn btn-primary btn-xs" th:href="@{/form/}+${cliente.Id}">Editar</a></td>
-                <td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/}+${cliente.id}" onclick="return confirm('Esta seguro de eliminar?')">Eliminar</a></td>
+                <td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/}+${cliente.id}"
+                        onclick="return confirm('Esta seguro de eliminar?')">Eliminar</a></td>
             </tr>
         </tbody>
     </table>
