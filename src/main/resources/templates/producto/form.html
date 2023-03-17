@@ -40,9 +40,10 @@
     <div class="container">
     <form th:action="@{producto/form}" th:object="${producto}" method="post">
     <div class="form-control">
-     <!--        <label class="col-sm-2 col-form-label">Nombre</label>
+          <label class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-6">
-                <input type="text" th:field="*{nombre}" class="form-control">
+                   <input type="text" th:field="*{unidades}" class="form-control">
+                   <!--
             </div>
        </div>
         <div class="form-control">
@@ -68,7 +69,7 @@
                 <input type="submit" value="Crear Cliente" class="btn btn-primary">
             </div>
         </div>
-        <!--
+        
         <table class="table text-center">
             <tr>
                 <td>Nombre</td>
@@ -100,7 +101,7 @@
                 </td>
             </tr>
             <input type="hidden" th:field="*{id}">
-        </table>-->-->
+        </table>-->
 
     </form>
 </div>
