@@ -13,48 +13,41 @@ public class Producto implements Serializable{
     //Atributos
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id, precio, unidades;
-    private String nombre,descripcion; 
-    //@Column(name =)
-
+    private Long id;
+    private int precio, unidades;
+    private String nombre,descripcion;
+    
     public Long getId() {
-        return this.id;
+        return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Long getPrecio() {
-        return this.precio;
+    public int getPrecio() {
+        return precio;
     }
-
-    public void setPrecio(Long precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
-
-    public Long getUnidades() {
-        return this.unidades;
+    public int getUnidades() {
+        return unidades;
     }
-
-    public void setUnidades(Long unidades) {
+    public void setUnidades(int unidades) {
         this.unidades = unidades;
     }
-
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getDescripion() {
-        return this.descripcion;
+    public String getDescripcion() {
+        return descripcion;
     }
-
-    public void setDescripion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
+    } 
+
+    //@Column(name =)
     
 }

@@ -33,6 +33,7 @@ public class ClienteController {
         Cliente cliente = new Cliente();
 
         model.addAttribute("titulo", "Formulario de clientes");
+        model.addAttribute("valor", "Crear cliente");
         model.addAttribute("cliente", cliente);
         return "form";
     }
@@ -59,6 +60,7 @@ public class ClienteController {
         }
 
         model.addAttribute("titulo", "Formulario de clientes");
+        model.addAttribute("valor", "Editar cliente");
         model.addAttribute("cliente", cliente);
         return "form";
     }

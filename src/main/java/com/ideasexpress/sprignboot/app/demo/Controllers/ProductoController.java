@@ -27,14 +27,14 @@ public class ProductoController {
     public String crear(Model model){
         Producto producto = new Producto();
         model.addAttribute("titulo", "Formulario de Productos");
-        model.addAttribute("productos", producto);
+        model.addAttribute("producto", producto);
         return "producto/form";
     }
     @PostMapping(value="/producto/form") //Error con unidades
     public String guardar(Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
-        return "redirect:producto/listar";
+        return "redirect:/listar";
     }
     @GetMapping("/producto/form/{id}")
     public String editar(@PathVariable(value = "id") Long id,Model model){

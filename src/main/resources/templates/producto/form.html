@@ -42,25 +42,25 @@
     <div class="form-control">
           <label class="col-sm-2 col-form-label">Nombre</label>
                 <div class="col-sm-6">
-                   <input type="text" th:text="${nombre}" class="form-control">
+                   <input type="text" th:field="*{nombre}" class="form-control">
             </div>
-       </div>
+       </div>|<span th:text="${producto}"></span>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Descripcion</label>
             <div class="col-sm-6">
-                <input type="text" th:text="${descripcion}" class="form-control">
+                <input type="text" th:field="*{descripcion}" class="form-control">
             </div>
         </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">precio</label>
             <div class="col-sm-6">
-                <input type="number" th:text="${precio}" class="form-control">
+                <input type="number" th:field="*{precio}" class="form-control">
             </div>
         </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">unidades</label>
             <div class="col-sm-6">
-                <input type="number" th:text="${unidades}" class="form-control">
+                <input type="number" th:field="*{unidades}" class="form-control">
             </div>
         </div>
         <div class="form-control">

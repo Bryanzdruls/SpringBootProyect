@@ -36,7 +36,7 @@
 
     <h1 th:text="${titulo}" class="text-center"></h1>
     <br>
-
+    |<span th:text="${cliente}"></span>
     <div class="container">
     <form th:action="@{/form}" th:object="${cliente}" method="post">
         <div class="form-control">
@@ -65,7 +65,7 @@
         </div>
         <div class="form-control">
             <div class="col-sm-6">
-                <input type="submit" value="Crear Cliente" th:field="*{CreateAt}" class="btn btn-primary">
+                <input type="submit" th:value="${valor}" th:field="*{CreateAt}" class="btn btn-primary">
             </div>
         </div>
         <!--
