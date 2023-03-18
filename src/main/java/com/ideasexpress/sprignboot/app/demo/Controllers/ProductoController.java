@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IProductoDao;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
@@ -31,10 +32,11 @@ public class ProductoController {
         return "producto/form";
     }
     @PostMapping(value="/producto/form") //Error con unidades
-    public String guardar(Producto producto, SessionStatus status){
+    public RedirectView guardar(Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
-        return "redirect:/listar";
+        //return "redirect:producto/listar";            //no funciona estando dentro de una carpeta
+        return new RedirectView("/producto/listar");    //metodo para redirigir cuando se esta dentro de una carpeta
     }
     @GetMapping("/producto/form/{id}")
     public String editar(@PathVariable(value = "id") Long id,Model model){
@@ -45,7 +47,7 @@ public class ProductoController {
             return"redirect:/producto/listar";
         }
         model.addAttribute("titulo", "Formulario de productos");
-        model.addAttribute("cliente", producto);
+        model.addAttribute("producto", producto);
         return "producto/form";
     }
     @GetMapping("/producto/eliminar/{id}")

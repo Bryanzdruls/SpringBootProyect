@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Producto </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -36,7 +36,7 @@
 
     <h1 th:text="${titulo}" class="text-center"></h1>
     <br>
-    <a th:href="@{/producto/form}" class="btn btn-secondary">Registrar Producto</a>
+    <a th:href="@{/producto/form}" class="btn btn-primary">Registrar Producto</a>
     <table class="table text-center">
         <thead>
             <tr>
