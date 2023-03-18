@@ -44,7 +44,7 @@
                 <div class="col-sm-6">
                    <input type="text" th:field="*{nombre}" class="form-control">
             </div>
-       </div>|<span th:text="${producto}"></span>
+       </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Descripcion</label>
             <div class="col-sm-6">
@@ -65,7 +65,7 @@
         </div>
         <div class="form-control">
             <div class="col-sm-6">
-                <input type="submit" value="Crear producto" class="btn btn-primary">
+                <input type="submit" th:value="${valor}" class="btn btn-primary">
             </div>
         </div>
         

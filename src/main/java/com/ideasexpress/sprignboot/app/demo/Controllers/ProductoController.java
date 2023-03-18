@@ -28,6 +28,7 @@ public class ProductoController {
     public String crear(Model model){
         Producto producto = new Producto();
         model.addAttribute("titulo", "Formulario de Productos");
+        model.addAttribute("valor", "Crear producto");
         model.addAttribute("producto", producto);
         return "producto/form";
     }
@@ -47,6 +48,7 @@ public class ProductoController {
             return"redirect:/producto/listar";
         }
         model.addAttribute("titulo", "Formulario de productos");
+        model.addAttribute("valor", "Editar producto");
         model.addAttribute("producto", producto);
         return "producto/form";
     }
