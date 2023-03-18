@@ -10,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
+
 @Repository
-public class ProductoDaoImp implements ProductoDao{
+public class ProductoDaoImp implements IProductoDao{
     @PersistenceContext
     private EntityManager em;
     

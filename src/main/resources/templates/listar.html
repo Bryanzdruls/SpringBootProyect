@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">SpringTrap </a>
+            <a class="navbar-brand" href="#" >Clientes </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/listar}">Cliente</a>
+                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Proceso</a>
@@ -56,7 +56,7 @@
                 <td th:text="${cliente.Email}"></td>
                 <td th:text="${cliente.CreateAt}"></td>
                 <td><a class="btn btn-primary btn-xs" th:href="@{/form/}+${cliente.Id}">Editar</a></td>
-                <td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/}+${cliente.id}"
+                <td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/}+${cliente.Id}"
                         onclick="return confirm('Esta seguro de eliminar?')">Eliminar</a></td>
             </tr>
         </tbody>

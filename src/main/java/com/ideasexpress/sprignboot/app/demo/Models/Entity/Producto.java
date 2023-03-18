@@ -14,7 +14,7 @@ public class Producto implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id, precio, unidades;
-    private String nombre,descripion; 
+    private String nombre,descripcion; 
     //@Column(name =)
 
     public Long getId() {
@@ -50,11 +50,11 @@ public class Producto implements Serializable{
     }
 
     public String getDescripion() {
-        return this.descripion;
+        return this.descripcion;
     }
 
-    public void setDescripion(String descripion) {
-        this.descripion = descripion;
+    public void setDescripion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
 }

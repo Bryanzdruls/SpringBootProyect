@@ -9,32 +9,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.ideasexpress.sprignboot.app.demo.Models.DAO.ProductoDao;
+import com.ideasexpress.sprignboot.app.demo.Models.DAO.IProductoDao;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
 @Controller
 @SessionAttributes("producto")//Nombre atributo
 public class ProductoController {
     @Autowired
-    private ProductoDao productoDao;
+    private IProductoDao productoDao;
     @GetMapping("/producto/listar")
     public String listar(Model model){
         model.addAttribute("titulo", "Listado de Productos");
         model.addAttribute("productos", productoDao.findAll());
         return"/producto/listar";
     }
-    @GetMapping("/producto/form") //posible lugar de error
+    @GetMapping("/producto/form") //ERROR AL DARLE AL BOTON
     public String crear(Model model){
         Producto producto = new Producto();
         model.addAttribute("titulo", "Formulario de Productos");
         model.addAttribute("productos", producto);
         return "producto/form";
     }
-    @PostMapping(value="/producto/form")
+    @PostMapping(value="/producto/form") //Error con unidades
     public String guardar(Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
-        return "redirect:/producto/listar";
+        return "redirect:producto/listar";
     }
     @GetMapping("/producto/form/{id}")
     public String editar(@PathVariable(value = "id") Long id,Model model){
@@ -46,7 +46,7 @@ public class ProductoController {
         }
         model.addAttribute("titulo", "Formulario de productos");
         model.addAttribute("cliente", producto);
-        return "/producto/form";
+        return "producto/form";
     }
     @GetMapping("/producto/eliminar/{id}")
     public String eliminar(@PathVariable(value = "id") Long id, Model model){
