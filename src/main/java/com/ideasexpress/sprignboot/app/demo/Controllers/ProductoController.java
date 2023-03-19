@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.view.RedirectView;
@@ -15,6 +16,7 @@ import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
 @Controller
 @SessionAttributes("producto")//Nombre atributo
+@RequestMapping("/producto")
 public class ProductoController {
     @Autowired
     private IProductoDao productoDao;
@@ -24,6 +26,7 @@ public class ProductoController {
         model.addAttribute("productos", productoDao.findAll());
         return"/producto/listar";
     }
+    
     @GetMapping("/producto/form") //ERROR AL DARLE AL BOTON
     public String crear(Model model){
         Producto producto = new Producto();
