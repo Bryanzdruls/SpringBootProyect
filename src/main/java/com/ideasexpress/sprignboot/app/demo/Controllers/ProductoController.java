@@ -34,7 +34,7 @@ public class ProductoController {
     public String guardar(Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
-        return "redirect:/listar";
+        return "redirect:/producto/listar";
     }
     @GetMapping("/producto/form/{id}")
     public String editar(@PathVariable(value = "id") Long id,Model model){
@@ -53,4 +53,5 @@ public class ProductoController {
         if(id>0)productoDao.delete(id);
         return "redirect:/producto/listar";
     }
+
 }

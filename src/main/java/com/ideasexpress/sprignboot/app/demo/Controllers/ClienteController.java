@@ -4,11 +4,15 @@ package com.ideasexpress.sprignboot.app.demo.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IClienteDao;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
@@ -41,10 +45,13 @@ public class ClienteController {
     // @RequestMapping(value = "/form", method = ResquestMethod.POST)
 
     @PostMapping(value = "/form")
-    public String guardar(Cliente cliente, SessionStatus status) {
-        clienteDao.save((cliente));
-        status.setComplete();
-        return "redirect:listar ";
+    ModelAndView guardar(@Validated Cliente cliente, BindingResult bindingResult, RedirectAttributes redirectA, SessionStatus status) {
+        if (bindingResult.hasErrors()){
+                return new ModelAndView("form").addObject("cliente", cliente);
+            }
+            clienteDao.save((cliente));
+            redirectA.addFlashAttribute("msgExito", "El contacto se creó");
+            return new ModelAndView("redirect:/listar");
     }
 
     @GetMapping("/form/{id}")

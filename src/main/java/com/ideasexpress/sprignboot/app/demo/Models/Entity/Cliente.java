@@ -10,20 +10,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "clientes")
-
 public class Cliente  implements Serializable{
     
     //Atributos
-
+    @NotNull (message = "campo requerido")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
+    @NotNull (message = "campo requerido")
     private String Nombre,Apellido,Email;
 
 
@@ -31,6 +31,7 @@ public class Cliente  implements Serializable{
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull (message = "campo requerido")
     private Date CreateAt;
 
     // @PrePersist

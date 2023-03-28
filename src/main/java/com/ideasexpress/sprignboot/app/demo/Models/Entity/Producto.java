@@ -6,15 +6,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "productos")//Nombre Tablas
+
 public class Producto implements Serializable{
     //Atributos
+    @NotNull
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    //@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @NotNull
+    @Size(min = 0)
     private int precio, unidades;
+    @NotNull
     private String nombre,descripcion;
     
     public Long getId() {
