@@ -58,4 +58,5 @@ public class Producto implements Serializable{
 
     //@Column(name =)
     
+    
 }

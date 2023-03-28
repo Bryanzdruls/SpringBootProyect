@@ -6,14 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IProductoDao;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
 @Controller
 @SessionAttributes("producto")//Nombre atributo
+@RequestMapping("/producto")
 public class ProductoController {
     @Autowired
     private IProductoDao productoDao;
@@ -23,18 +26,21 @@ public class ProductoController {
         model.addAttribute("productos", productoDao.findAll());
         return"/producto/listar";
     }
+    
     @GetMapping("/producto/form") //ERROR AL DARLE AL BOTON
     public String crear(Model model){
         Producto producto = new Producto();
         model.addAttribute("titulo", "Formulario de Productos");
+        model.addAttribute("valor", "Crear producto");
         model.addAttribute("producto", producto);
         return "producto/form";
     }
     @PostMapping(value="/producto/form") //Error con unidades
-    public String guardar(Producto producto, SessionStatus status){
+    public RedirectView guardar(Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
-        return "redirect:/producto/listar";
+        //return "redirect:producto/listar";            //no funciona estando dentro de una carpeta
+        return new RedirectView("/producto/listar");    //metodo para redirigir cuando se esta dentro de una carpeta
     }
     @GetMapping("/producto/form/{id}")
     public String editar(@PathVariable(value = "id") Long id,Model model){
@@ -45,7 +51,8 @@ public class ProductoController {
             return"redirect:/producto/listar";
         }
         model.addAttribute("titulo", "Formulario de productos");
-        model.addAttribute("cliente", producto);
+        model.addAttribute("valor", "Editar producto");
+        model.addAttribute("producto", producto);
         return "producto/form";
     }
     @GetMapping("/producto/eliminar/{id}")

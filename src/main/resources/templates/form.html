@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Clientes</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -36,7 +36,6 @@
 
     <h1 th:text="${titulo}" class="text-center"></h1>
     <br>
-    |<span th:text="${cliente}"></span>
     <div class="container">
     <form th:action="@{/form}" th:object="${cliente}" method="post">
         <div class="form-control">
