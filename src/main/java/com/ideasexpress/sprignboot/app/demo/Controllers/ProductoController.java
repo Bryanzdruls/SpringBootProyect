@@ -1,5 +1,7 @@
 package com.ideasexpress.sprignboot.app.demo.Controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,8 @@ import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
 @Controller
 @SessionAttributes("producto")//Nombre atributo
-@RequestMapping("/producto")
+@RequestMapping(value="/api")
+//@RequestMapping("/producto")
 public class ProductoController {
     @Autowired
     private IProductoDao productoDao;
@@ -36,7 +39,7 @@ public class ProductoController {
         return "producto/form";
     }
     @PostMapping(value="/producto/form") //Error con unidades
-    public RedirectView guardar(Producto producto, SessionStatus status){
+    public RedirectView guardar(@Valid Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
         //return "redirect:producto/listar";            //no funciona estando dentro de una carpeta

@@ -6,8 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+
+ 
 
 @Entity
 @Table(name = "productos")//Nombre Tablas
@@ -20,9 +24,9 @@ public class Producto implements Serializable{
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     @NotNull
-    @Size(min = 0)
+    @Min(0)
     private int precio, unidades;
-    @NotNull
+    @NotBlank
     private String nombre,descripcion;
     
     public Long getId() {

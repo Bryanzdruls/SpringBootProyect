@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,11 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cliente  implements Serializable{
     
     //Atributos
-    @NotNull (message = "campo requerido")
+    @NotNull 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @NotNull (message = "campo requerido")
+    @NotBlank 
     private String Nombre,Apellido,Email;
 
 
