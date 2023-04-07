@@ -4,6 +4,7 @@ package com.ideasexpress.sprignboot.app.demo.Controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +23,7 @@ import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
 
 @Controller
 @SessionAttributes("cliente") //igual que todos los atributos
+@RequestMapping("/cliente")
 public class ClienteController {
 
     @Autowired
@@ -53,10 +56,11 @@ public class ClienteController {
             }
             clienteDao.save((cliente));
             redirectA.addFlashAttribute("msgExito", "El contacto se creó");
-            return new ModelAndView("redirect:/listar");
+            return new ModelAndView("redirect:/cliente/listar");
     }
 
     @GetMapping("/form/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String editar(@PathVariable(value = "id") Long id, Model model) {
 
         Cliente cliente = null;
@@ -74,10 +78,11 @@ public class ClienteController {
         return "form";
     }
     @GetMapping("/eliminar/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String eliminar(@PathVariable(value= "id") Long id, Model model)
     {
         if(id>0)clienteDao.delete(id);
-        return "redirect:/listar";
+        return "redirect:/cliente/listar";
     }
 
 }

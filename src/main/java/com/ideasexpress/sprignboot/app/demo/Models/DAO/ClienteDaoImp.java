@@ -5,16 +5,22 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
+import com.ideasexpress.sprignboot.app.demo.Models.Repository.IClienteRepo;
 
 @Repository
 public class ClienteDaoImp implements IClienteDao {
 
     @PersistenceContext
     private EntityManager em;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    //private IClienteRepo repo;
 
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
@@ -29,6 +35,7 @@ public class ClienteDaoImp implements IClienteDao {
     @Override
     public void save(Cliente cliente) {
 
+        cliente.setPass(passwordEncoder.encode(cliente.getPass()));
         if (cliente.getId() != null && cliente.getId() > 0) {
             em.merge(cliente);
         } else {
@@ -47,4 +54,11 @@ public class ClienteDaoImp implements IClienteDao {
         Cliente cliente = findOne(id);
         em.remove(cliente);
     }
+
+/*    @Override
+    public String addUser(Cliente cliente) {
+        repo.save(cliente);
+    }
+ */
+    
 }

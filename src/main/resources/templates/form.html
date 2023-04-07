@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/listar}">Cliente</a>
+                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/cliente/listar}">Cliente</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Otra</a>
@@ -37,12 +37,24 @@
     <h1 th:text="${titulo}" class="text-center"></h1>
     <br>
     <div class="container">
-    <form th:action="@{/form}" th:object="${cliente}" method="post">
+    <form th:action="@{/cliente/form}" th:object="${cliente}" method="post">
+        <div class="form-control">
+            <label class="col-sm-2 col-form-label">Usuario</label>
+            <div class="col-sm-6">
+                <input type="text" th:field="*{Usuario}" class="form-control">
+            </div>
+        </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Nombre</label>
             <div class="col-sm-6">
                 <input type="text" th:field="*{nombre}" class="form-control">
                 <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+            </div>
+        </div>
+        <div class="form-control">
+            <label class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-6">
+                <input type="password" th:field="*{Pass}" class="form-control">
             </div>
         </div>
         <div class="form-control">
@@ -61,6 +73,12 @@
             <label class="col-sm-2 col-form-label">Fecha</label>
             <div class="col-sm-6">
                 <input type="date" th:field="*{CreateAt}" class="form-control">
+            </div>
+        </div>
+        <div class="form-control">
+            <label class="col-sm-2 col-form-label">Rol</label>
+            <div class="col-sm-6">
+                <input type="text" th:field="*{roles}" class="form-control">
             </div>
         </div>
         <div class="form-control">
