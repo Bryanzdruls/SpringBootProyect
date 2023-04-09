@@ -16,19 +16,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "clientes")
-public class Cliente  implements Serializable{
-    
-    //Atributos
-    //@NotNull 
+public class Cliente implements Serializable {
+
+    // Atributos
+    // @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    //@NotBlank 
-    private String usuario,Nombre,Apellido,Email;
+    // @NotBlank
+    private String usuario, Nombre, Apellido, Email;
     @NotBlank
     private String pass;
-    
+
     private String Roles;
+
     public String getRoles() {
         return Roles;
     }
@@ -56,12 +57,12 @@ public class Cliente  implements Serializable{
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    //@NotNull (message = "campo requerido")
+    // @NotNull (message = "campo requerido")
     private Date CreateAt;
 
     // @PrePersist
     // public void PrePersist(){
-    //     CreateAt = new Date();
+    // CreateAt = new Date();
     // }
 
     public Long getId() {
@@ -79,8 +80,6 @@ public class Cliente  implements Serializable{
     public void setNombre(String nombre) {
         Nombre = nombre;
     }
-
-
 
     public String getApellido() {
         return Apellido;

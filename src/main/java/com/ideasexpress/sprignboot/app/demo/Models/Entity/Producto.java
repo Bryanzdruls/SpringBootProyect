@@ -6,61 +6,69 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-
- 
-
 @Entity
-@Table(name = "productos")//Nombre Tablas
+@Table(name = "productos") // Nombre Tablas
 
-public class Producto implements Serializable{
-    //Atributos
-    @NotNull
+public class Producto implements Serializable {
+    // Atributos
+
     @Id
-    //@GeneratedValue(strategy= GenerationType.IDENTITY)
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    // @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotNull
-    @Min(0)
-    private int precio, unidades;
+    private int precio;
+    @NotNull
+    private int unidades;
     @NotBlank
-    private String nombre,descripcion;
-    
+    private String nombre;
+    @NotBlank
+    private String descripcion;
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public int getPrecio() {
         return precio;
     }
+
     public void setPrecio(int precio) {
         this.precio = precio;
     }
+
     public int getUnidades() {
         return unidades;
     }
+
     public void setUnidades(int unidades) {
         this.unidades = unidades;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public String getDescripcion() {
         return descripcion;
     }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    } 
+    }
 
-    //@Column(name =)
-    
-    
+    // @Column(name =)
+
 }

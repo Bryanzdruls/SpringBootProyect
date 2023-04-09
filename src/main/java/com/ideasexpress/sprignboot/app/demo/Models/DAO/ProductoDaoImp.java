@@ -10,24 +10,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
-
 @Repository
-public class ProductoDaoImp implements IProductoDao{
+public class ProductoDaoImp implements IProductoDao {
     @PersistenceContext
     private EntityManager em;
-    
+
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     @Override
     public List<Producto> findAll() {
         return em.createQuery("from Producto").getResultList();
     }
+
     @Transactional
     @Override
     public void save(Producto producto) {
-        if(producto.getId()!=null && producto.getId()>0){
+        if (producto.getId() != null && producto.getId() > 0) {
             em.merge(producto);
-        }else{
+        } else {
             em.persist(producto);
         }
     }
@@ -41,8 +41,8 @@ public class ProductoDaoImp implements IProductoDao{
     @Override
     @Transactional
     public void delete(Long id) {
-        Producto producto  = findOne(id);
+        Producto producto = findOne(id);
         em.remove(producto);
     }
-    
+
 }

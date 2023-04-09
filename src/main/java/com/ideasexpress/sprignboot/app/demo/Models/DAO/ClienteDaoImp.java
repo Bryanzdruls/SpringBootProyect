@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
-import com.ideasexpress.sprignboot.app.demo.Models.Repository.IClienteRepo;
 
 @Repository
 public class ClienteDaoImp implements IClienteDao {
@@ -20,7 +19,7 @@ public class ClienteDaoImp implements IClienteDao {
     private EntityManager em;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    //private IClienteRepo repo;
+    // private IClienteRepo repo;
 
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
@@ -48,6 +47,7 @@ public class ClienteDaoImp implements IClienteDao {
     public Cliente findOne(Long id) {
         return em.find(Cliente.class, id);
     }
+
     @Override
     @Transactional
     public void delete(Long id) {
@@ -55,10 +55,11 @@ public class ClienteDaoImp implements IClienteDao {
         em.remove(cliente);
     }
 
-/*    @Override
-    public String addUser(Cliente cliente) {
-        repo.save(cliente);
-    }
- */
-    
+    /*
+     * @Override
+     * public String addUser(Cliente cliente) {
+     * repo.save(cliente);
+     * }
+     */
+
 }
