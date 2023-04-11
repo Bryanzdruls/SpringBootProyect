@@ -1,15 +1,11 @@
 package com.ideasexpress.sprignboot.app.demo.Controllers;
 
-import java.security.Provider.Service;
 
-import javax.naming.Binding;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.view.RedirectView;
-
-import com.ideasexpress.sprignboot.app.demo.Exception.AppExceptionHandler;
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IProductoDao;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
@@ -28,8 +22,10 @@ import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 //@RequestMapping(value="/api")
 @RequestMapping("/producto")
 public class ProductoController {
+    
     @Autowired
     private IProductoDao productoDao;
+
     @GetMapping("/listar")
     public String listar(Model model){
         model.addAttribute("titulo", "Listado de Productos");
@@ -37,7 +33,7 @@ public class ProductoController {
         return"/producto/listar";
     }
     
-    @GetMapping("/form") //ERROR AL DARLE AL BOTON
+    @GetMapping("/form") //Se ejecuta como caso de uso desde la web
     public String crear(Model model){
         Producto producto = new Producto();
         model.addAttribute("titulo", "Formulario de Productos");
@@ -45,7 +41,7 @@ public class ProductoController {
         model.addAttribute("producto", producto);
         return "producto/form";
     }
-    @PostMapping(value="/form") //Error con unidades
+    @PostMapping(value="/form") //Se ejecuta despues del Get Mapping
     public RedirectView guardar(@Valid Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
