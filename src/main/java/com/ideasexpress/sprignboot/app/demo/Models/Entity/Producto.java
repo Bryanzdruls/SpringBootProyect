@@ -20,11 +20,11 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
+    @NotNull(message="ingrese ")
     private int precio;
     @NotNull
     private int unidades;
-    @NotBlank
+    @NotBlank(message="he como vamo")
     private String nombre;
     @NotBlank
     private String descripcion;

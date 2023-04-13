@@ -21,8 +21,10 @@ import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 //@RequestMapping(value="/api")
 @RequestMapping("/producto")
 public class ProductoController {
+    
     @Autowired
     private IProductoDao productoDao;
+
     @GetMapping("/listar")
     public String listar(Model model){
         model.addAttribute("titulo", "Listado de Productos");
@@ -30,7 +32,7 @@ public class ProductoController {
         return"/producto/listar";
     }
     
-    @GetMapping("/form") //ERROR AL DARLE AL BOTON
+    @GetMapping("/form") //Se ejecuta como caso de uso desde la web
     public String crear(Model model){
         Producto producto = new Producto();
         model.addAttribute("titulo", "Formulario de Productos");
@@ -38,7 +40,7 @@ public class ProductoController {
         model.addAttribute("producto", producto);
         return "producto/form";
     }
-    @PostMapping(value="/form") //Error con unidades
+    @PostMapping(value="/form") //Se ejecuta despues del Get Mapping
     public RedirectView guardar(@Valid Producto producto, SessionStatus status){
         productoDao.save(producto);
         status.setComplete();
