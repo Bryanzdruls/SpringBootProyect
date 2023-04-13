@@ -1,6 +1,8 @@
 package com.ideasexpress.sprignboot.app.demo.Controllers;
 
 
+
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,16 +10,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IClienteDao;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
 
@@ -50,14 +48,27 @@ public class ClienteController {
     // @RequestMapping(value = "/form", method = ResquestMethod.POST)
 
     @PostMapping(value = "/form")
-    ModelAndView guardar(@Valid Cliente cliente, BindingResult bindingResult, RedirectAttributes redirectA, SessionStatus status) {
+    //@PostMapping(value = "/form")
+    public String guardar(@Valid Cliente cliente, BindingResult bindingResult, SessionStatus status, Model model) {      
         if (bindingResult.hasErrors()){
+                model.addAttribute("titulo", "Formulario de clientes");
+                model.addAttribute("valor", "Crear cliente");
+                model.addAttribute("cliente", cliente);
+                return "form";
+            }           
+            clienteDao.save(cliente);
+            status.setComplete();
+            return "redirect:/cliente/listar";
+    }
+    /*public ModelAndView guardar(@Valid Cliente cliente, BindingResult bindingResult, SessionStatus status, Model model) {      
+        if (bindingResult.hasErrors()){
+                model.addAttribute("valor", "Crear cliente");
                 return new ModelAndView("form").addObject("cliente", cliente);
             }
+
             clienteDao.save((cliente));
-            redirectA.addFlashAttribute("msgExito", "El contacto se creó");
             return new ModelAndView("redirect:/cliente/listar");
-    }
+    }*/
 
     @GetMapping("/form/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

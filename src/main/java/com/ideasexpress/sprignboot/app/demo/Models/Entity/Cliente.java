@@ -10,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,15 +22,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Cliente implements Serializable {
 
     // Atributos
-    // @NotNull
+    @NotNull(message = "Debes especificar el apellido")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    // @NotBlank
-    private String usuario, Nombre, Apellido, Email;
-    @NotBlank
-    private String pass;
+    @NotEmpty(message = "Debes especificar el Usuario")
+    private String usuario;
+    @NotEmpty(message = "Debes especificar el Nombre")
+    private String Nombre;
+    @NotEmpty (message = "Debes especificar el Apellido")
+    @Size(message = "El apellido deber medir entre 1 y 50")
+    private String Apellido;
 
+    @Email
+    @NotEmpty(message = "Debes rellenar este campo")
+    private String Email;
+    @NotEmpty(message = "Debes rellenar este campo")
+    private String Pass;
+    @NotEmpty(message = "Debes rellenar este campo")
     private String Roles;
 
     public String getRoles() {
@@ -39,11 +51,11 @@ public class Cliente implements Serializable {
     }
 
     public String getPass() {
-        return pass;
+        return Pass;
     }
 
     public void setPass(String password) {
-        pass = password;
+        Pass = password;
     }
 
     public String getUsuario() {

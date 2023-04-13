@@ -37,53 +37,60 @@
     <h1 th:text="${titulo}" class="text-center"></h1>
     <br>
     <div class="container">
+
     <form th:action="@{/cliente/form}" th:object="${cliente}" method="post">
         <div class="form-control">
-            <label class="col-sm-2 col-form-label">Usuario</label>
+            <label for="Usuario" class="col-sm-2 col-form-label">Usuario</label>
             <div class="col-sm-6">
-                <input type="text" th:field="*{Usuario}" class="form-control">
+                <input id="Usuario"type="text" th:field="*{usuario}" class="form-control" th:classappend="${#fields.hasErrors('usuario')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{usuario}"></div>
             </div>
         </div>
         <div class="form-control">
-            <label class="col-sm-2 col-form-label">Nombre</label>
+            <label  for="nombre" class="col-sm-2 col-form-label">Nombre</label>
             <div class="col-sm-6">
-                <input type="text" th:field="*{nombre}" class="form-control">
-                <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                <input id="nombre"  type="text" th:field="*{Nombre}" class="form-control" th:classappend="${#fields.hasErrors('Nombre')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{Nombre}"></div>
             </div>
         </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-6">
-                <input type="password" th:field="*{Pass}" class="form-control">
+                <input id="Pass" type="password" th:field="*{pass}" class="form-control" th:classappend="${#fields.hasErrors('pass')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{pass}"></div>
             </div>
         </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Apellido</label>
             <div class="col-sm-6">
-                <input type="text" th:field="*{apellido}" class="form-control">
+                <input id="apellido" type="text" th:field="*{Apellido}" class="form-control" th:classappend="${#fields.hasErrors('Apellido')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{Apellido}"></div>
             </div>
         </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-6">
-                <input type="email" th:field="*{email}" class="form-control">
+                <input id="email"type="email" th:field="*{Email}" class="form-control" th:classappend="${#fields.hasErrors('Email')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{Email}"></div>
             </div>
         </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Fecha</label>
             <div class="col-sm-6">
-                <input type="date" th:field="*{CreateAt}" class="form-control">
+                <input id="CreateAt" type="date" th:field="*{CreateAt}" class="form-control" th:classappend="${#fields.hasErrors('Email')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{Email}"></div>
             </div>
         </div>
         <div class="form-control">
             <label class="col-sm-2 col-form-label">Rol</label>
             <div class="col-sm-6">
-                <input type="text" th:field="*{roles}" class="form-control">
+                <input id="roles"type="text" th:field="*{Roles}" class="form-control" th:classappend="${#fields.hasErrors('Roles')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{Roles}"></div>
             </div>
         </div>
         <div class="form-control">
             <div class="col-sm-6">
-                <input type="submit" th:value="${valor}" th:field="*{CreateAt}" class="btn btn-primary">
+                <input type="submit" th:value="${valor}"  class="btn btn-primary">
             </div>
         </div>
         <!--
