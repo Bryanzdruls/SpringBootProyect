@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -20,13 +21,14 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull(message="ingrese ")
+    @NotNull(message="ingrese un numero mayor a 0")
+    @Min(value=30)
     private int precio;
-    @NotNull
+    @NotNull(message = "ingrese un numero")
     private int unidades;
-    @NotBlank(message="he como vamo")
+    @NotBlank(message="Ingrese el nombre del producto")
     private String nombre;
-    @NotBlank
+    @NotBlank(message = "Ingrese la descripcion del producto")
     private String descripcion;
 
     public Long getId() {
