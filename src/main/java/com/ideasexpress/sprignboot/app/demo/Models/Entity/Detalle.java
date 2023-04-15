@@ -10,12 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 @Entity
 @Table(name="detalle")
 public class Detalle {
@@ -28,22 +22,36 @@ public class Detalle {
     public int cantidad;
     @Column(name="valorVenta")
     public int valorVenta;
-    @Column(name="id_detalle")
-    public Long id_producto;
-    @Column(name="id_detalle")
-    public Long id_venta;
-
-
 
 
     @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinColumn(name="Venta_id")
-    private Ventas venta;
+    private Ventas ventaMap;
+
+    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @JoinColumn(name="producto_id")
+    private Producto productoMap;
 
 
    
 
     //metodos
+
+    public Ventas getVentaMap() {
+        return this.ventaMap;
+    }
+
+    public void setVentaMap(Ventas ventaMap) {
+        this.ventaMap = ventaMap;
+    }
+
+    public Producto getProductoMap() {
+        return this.productoMap;
+    }
+
+    public void setProductoMap(Producto productoMap) {
+        this.productoMap = productoMap;
+    }
     public Detalle(){
     }
 
@@ -77,24 +85,7 @@ public class Detalle {
     }
 
 
-    public Long getId_producto() {
-        return id_producto;
-    }
 
-
-    public void setId_producto(Long id_producto) {
-        this.id_producto = id_producto;
-    }
-
-
-    public Long getId_venta() {
-        return id_venta;
-    }
-
-
-    public void setId_venta(Long id_venta) {
-        this.id_venta = id_venta;
-    }
 
     @Override
     public String toString() {
@@ -102,16 +93,14 @@ public class Detalle {
             " id='" + getId() + "'" +
             ", cantidad='" + getCantidad() + "'" +
             ", valorVenta='" + getValorVenta() + "'" +
-            ", id_producto='" + getId_producto() + "'" +
-            ", id_venta='" + getId_venta() + "'" +
             "}";
     }
     
     public Ventas getVenta() {
-        return venta;
+        return ventaMap;
     }
 
     public void setVenta(Ventas venta) {
-        this.venta = venta;
+        this.ventaMap = venta;
     }
 }

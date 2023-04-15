@@ -7,59 +7,63 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <title th:text="${titulo}">Document</title>
+    <title th:text="${tituloP}">Document</title>
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" >
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Producto </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/cliente/listar}">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Proceso</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mantenimiento</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <h1 th:text="${titulo}" class="text-center"></h1>
-    <br>
-    <a th:href="@{/producto/form}" class="btn btn-primary">Registrar Producto</a>
+    <div th:text="${venta}"></div>
+    <div th:text="${cliente}"></div>
+<div style="flex: auto;">
+    <h1 style="align-self: center;"th:text="${tituloP}"></h1>
     <table class="table text-center">
         <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Unidades</th>            
+                <th scope="col">id venta</th>
+                <th scope="col">id cliente</th>
+
+                <th scope="col">subtotal</th>
+                <th scope="col">total</th>
+                <th scope="col">fecha</th>
             </tr>
         </thead>
+        
         <tbody>
-            <tr th:each="producto: ${productos}">
-                <td th:text="${producto.id}"></td>
-                <td th:text="${producto.nombre}"></td>
-                <td th:text="${producto.descripcion}"></td>
-                <td th:text="${producto.precio}"></td>
-                <td th:text="${producto.unidades}"></td>
-                <td><a class="btn btn-primary btn-xs" th:href="@{/producto/form/}+${producto.id}">Editar</a></td>
-                <td><a class="btn btn-danger btn-xs" th:href="@{/producto/eliminar/}+${producto.id}"
-                        onclick="return confirm('Esta seguro de eliminar?')">Eliminar</a></td>
+            <tr th:each="venta: ${ventas}">
+                <td th:text="${venta.Id}"></td>
+                <td th:text="${venta.cliente.id}"></td>
+                <!-- <td th:text="${venta.fecha}"></td>-->
+                <td th:text="${venta.subtotal}"></td>
+                <td th:text="${venta.total}"></td>
+
             </tr>
         </tbody>
     </table>
+
+</div>
+<div style="flex:auto">
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">id Detalle</th>
+                
+                <th scope="col">nombre producto</th>
+                <th scope="col">cantidad producto</th>
+                <th scope="col">valor producto</th>
+                <th scope="col">id cliente</th>
+            </tr>
+        </thead>
+<!--        <tbody>
+            <tr th:each="venta: ${ventas}">
+                <td th:text="${venta.Id}"></td>
+                <td th:text="${venta.subtotal}"></td>
+                <td th:text="${venta.Nombre}"></td>
+                <td th:text="${venta.Apellido}"></td>
+                <td th:text="${venta.Pass}"></td>
+
+            </tr>
+        </tbody>-->
+    </table>
+</div>
+
 </body>
 
 </html>

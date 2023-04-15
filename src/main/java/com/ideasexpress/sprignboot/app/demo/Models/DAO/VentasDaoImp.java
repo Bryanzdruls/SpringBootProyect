@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Ventas;
 
 @Repository
@@ -18,10 +19,11 @@ public class VentasDaoImp  implements IVentasDao{
 
 
     @SuppressWarnings("unchecked")
-    @org.springframework.transaction.annotation.Transactional(readOnly=true)
+    @Transactional(readOnly=true)
+
     @Override
     public List<Ventas> findAll() {
-        return em.createQuery("from producto").getResultList();
+        return em.createQuery("from Ventas ").getResultList();
     }
 
     @Transactional
@@ -39,12 +41,19 @@ public class VentasDaoImp  implements IVentasDao{
     public Ventas findOne(Long id) {
         return em.find(Ventas.class, id);
     }
-
     @Override
     @Transactional
     public void delete(Long id) {
         Ventas venta = findOne(id);
         em.remove(venta);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Ventas> findOneCliente(Long id) {       
+        return em.createQuery("from Ventas where id_cliente like:id ")
+        .setParameter("id", id)
+        .getResultList();
     }
     
 }

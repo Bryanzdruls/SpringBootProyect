@@ -25,7 +25,6 @@ public class ClienteDaoImp implements IClienteDao {
     @Transactional(readOnly = true)
     @Override
     public List<Cliente> findAll() {
-
         return em.createQuery("from Cliente").getResultList();
 
     }
@@ -41,6 +40,7 @@ public class ClienteDaoImp implements IClienteDao {
             em.persist(cliente);
         }
     }
+    
 
     @Override
     @Transactional(readOnly = true)

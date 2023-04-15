@@ -3,6 +3,7 @@ package com.ideasexpress.sprignboot.app.demo.Controllers;
 
 
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IClienteDao;
+
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
+import com.ideasexpress.sprignboot.app.demo.Service.Insercion;
 
 @Controller
 @SessionAttributes("cliente") //igual que todos los atributos
@@ -27,11 +32,20 @@ public class ClienteController {
     @Autowired
     private IClienteDao clienteDao;
 
+
+    @Autowired
+    private Insercion insercion;
+
+    int sw=0;
     @GetMapping("/listar")
     public String listar(Model model) {
+        if(sw==0){
+            insercion.ventasPorCliente();
+            sw++;
+        };
+        
         model.addAttribute("titulo", "Listado de Clientes");
         model.addAttribute("clientes", clienteDao.findAll());
-
         return "listar";
     }
 
@@ -82,7 +96,7 @@ public class ClienteController {
         else{
             return "redirect:/listar";
         }
-
+        
         model.addAttribute("titulo", "Formulario de clientes");
         model.addAttribute("valor", "Editar cliente");
         model.addAttribute("cliente", cliente);
@@ -94,6 +108,18 @@ public class ClienteController {
     {
         if(id>0)clienteDao.delete(id);
         return "redirect:/cliente/listar";
+    }
+
+    @GetMapping("/ventas/{id}")
+    public String ventasCliente(@PathVariable(value = "id") Long id,Model model){
+        Cliente cliente = null;
+        if(id>0){
+            cliente = clienteDao.findOne(id);
+        }else{
+            return "redirect:/listar";
+        }
+        model.addAttribute("cliente", cliente);
+        return "/ventas/listar";
     }
 
 }

@@ -1,6 +1,7 @@
 package com.ideasexpress.sprignboot.app.demo.Models.Entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,8 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -18,18 +26,35 @@ import javax.persistence.Table;
 @Table(name = "ventas")
 public class Ventas { 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_venta")
     private Long id;
+    
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="fecha")
+    private Date fecha;
     @Column(name="subtotal")
     private int subtotal;
     @Column(name="total")
     private int total;
-    @Column(name="id_Usuario")
-    private Long id_Usuario;
 
-    @OneToMany(mappedBy="venta", cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @OneToMany(mappedBy="ventaMap", cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     private List<Detalle> detalle;
+
+    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @JoinColumn(name="id_cliente")
+    private Cliente cliente;
+
+    
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public void detallesDeVenta(Detalle detalles){
         if(detalle==null) detalle = new  ArrayList<>();
@@ -37,12 +62,15 @@ public class Ventas {
 
         detalles.setVenta(this);
     }
-
-
-
     public Ventas() {
-        
+}
+    public Ventas(Date fecha, int subtotal, int total) {
+        this.fecha = fecha;
+        this.subtotal = subtotal;
+        this.total = total;
     }
+        
+    
 
     @Override
     public String toString() {
@@ -50,7 +78,6 @@ public class Ventas {
             " id='" + getId() + "'" +
             ", subtotal='" + getSubtotal() + "'" +
             ", total='" + getTotal() + "'" +
-            ", id_Usuario='" + getId_Usuario() + "'" +
             "}";
     }
     public Long getId() {
@@ -76,16 +103,4 @@ public class Ventas {
     public void setTotal(int total) {
         this.total = total;
     }
-
-    public Long getId_Usuario() {
-        return this.id_Usuario;
-    }
-
-    public void setId_Usuario(Long id_Usuario) {
-        this.id_Usuario = id_Usuario;
-    }
-
-
-
-    
 }

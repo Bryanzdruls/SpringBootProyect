@@ -47,7 +47,7 @@
                 <th scope="col">Password</th>
                 <th scope="col">Email</th>
                 <th scope="col">Fecha</th>
-                <th scope="col">Editar</th>
+
             </tr>
         </thead>
         <tbody>
@@ -59,6 +59,7 @@
                 <td th:text="${cliente.Pass}"></td>
                 <td th:text="${cliente.Email}"></td>
                 <td th:text="${cliente.CreateAt}"></td>
+                <td><a class="btn btn-primary btn-xs" th:href="@{/ventas/listar/}+${cliente.Id}">Ver Compras</a></td>
                 <td><a class="btn btn-primary btn-xs" th:href="@{/cliente/form/}+${cliente.Id}">Editar</a></td>
                 <td><a class="btn btn-danger btn-xs" th:href="@{/cliente/eliminar/}+${cliente.Id}"
                         onclick="return confirm('Esta seguro de eliminar?')">Eliminar</a></td>

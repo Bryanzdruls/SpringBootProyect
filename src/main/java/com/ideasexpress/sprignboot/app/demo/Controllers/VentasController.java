@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IVentasDao;
+
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Ventas;
 
 @Repository
@@ -23,13 +25,15 @@ public class VentasController {
     @Autowired
     private IVentasDao ventasDao;
 
-    @GetMapping("/listar")
-    public String listar(Model model){
-        model.addAttribute("tituloP", "Listado de Productos");
-        model.addAttribute("productos", ventasDao.findAll());
+
+    @GetMapping("/listar/{id}")
+    public String listar(@PathVariable(value="id")Long id,Model model){
+
+        model.addAttribute("tituloP", "Ventas");
+        model.addAttribute("ventas", ventasDao.findOneCliente(id));
+        
         return"/ventas/listar";
     }
-    
     @GetMapping("/form") //Se ejecuta como caso de uso desde la web
     public String crear(Model model){
         Ventas venta = new Ventas();
@@ -71,4 +75,7 @@ public class VentasController {
         if(id>0)ventasDao.delete(id);
         return "redirect:/ventas/listar";
     }
+
+
+    
 }

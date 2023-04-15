@@ -41,7 +41,7 @@ public class SecutiryConfig  {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf().disable().authorizeHttpRequests()
-            .antMatchers("/producto/**", "/cliente/**","/h2-console/**").permitAll()
+            .antMatchers("/producto/**", "/cliente/**","cliente/form").permitAll()
             .and()
             //.authorizeHttpRequests().antMatchers().authenticated()
             //.and()
