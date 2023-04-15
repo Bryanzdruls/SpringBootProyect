@@ -46,5 +46,12 @@ public class DetalleDaoImp implements IDetalleDao {
         Detalle detalle = findOne(id);
         em.remove(detalle);
     }
-    
+
+    @Override
+    public List<Detalle> findVentas(Long id) {
+        
+        return em.createQuery("from Detalle where venta_id like:id ")
+        .setParameter("id", id)
+        .getResultList();
+    }
 }

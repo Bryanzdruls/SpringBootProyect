@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -39,19 +41,22 @@ public class Producto implements Serializable {
 
 
 
-    @OneToMany(mappedBy = "productoMap",cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
-    private List<Detalle> detallesDeProducto;
+    //@OneToOne(mappedBy = "productoMap",cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    //@JoinColumn(name="id_Detalle")
+    //private Detalle detallesDeProducto;
 
 
-    public void prouctosPorDetalle(Detalle detalle){
+   /*  public void prouctosPorDetalle(Detalle detalle){
         if(detallesDeProducto==null) detallesDeProducto = new ArrayList<>();
 
         detallesDeProducto.add(detalle);
 
         detalle.setProductoMap(this);
+    }*/
+
+    public Producto(){
+
     }
-
-
     public Long getId() {
         return id;
     }
@@ -93,5 +98,58 @@ public class Producto implements Serializable {
     }
 
     // @Column(name =)
+
+    public Producto(int precio, int unidades, String nombre, String descripcion) {
+        this.precio = precio;
+        this.unidades = unidades;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        //this.detallesDeProducto = detallesDeProducto;
+    }
+    
+
+    public Producto(Long id, int precio, int unidades, String nombre, String descripcion) {
+        this.id = id;
+        this.precio = precio;
+        this.unidades = unidades;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    public Producto id(Long id) {
+        setId(id);
+        return this;
+    }
+
+    public Producto precio(int precio) {
+        setPrecio(precio);
+        return this;
+    }
+
+    public Producto unidades(int unidades) {
+        setUnidades(unidades);
+        return this;
+    }
+
+    public Producto nombre(String nombre) {
+        setNombre(nombre);
+        return this;
+    }
+
+    public Producto descripcion(String descripcion) {
+        setDescripcion(descripcion);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", precio='" + getPrecio() + "'" +
+            ", unidades='" + getUnidades() + "'" +
+            ", nombre='" + getNombre() + "'" +
+            ", descripcion='" + getDescripcion() + "'" +
+            "}";
+    }
 
 }

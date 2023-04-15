@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "ventas")
 public class Ventas { 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO  )
     @Column(name="id_venta")
     private Long id;
     
@@ -34,6 +34,15 @@ public class Ventas {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="fecha")
     private Date fecha;
+    
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     @Column(name="subtotal")
     private int subtotal;
     @Column(name="total")

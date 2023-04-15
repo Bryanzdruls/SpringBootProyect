@@ -29,18 +29,33 @@
         <tbody>
             <tr th:each="venta: ${ventas}">
                 <td th:text="${venta.Id}"></td>
-                <td th:text="${venta.cliente.id}"></td>
-                <!-- <td th:text="${venta.fecha}"></td>-->
+                <td th:text="${venta.cliente.id}"></td>               
                 <td th:text="${venta.subtotal}"></td>
                 <td th:text="${venta.total}"></td>
+                <td th:text="${venta.fecha}"></td>
 
             </tr>
         </tbody>
     </table>
 
 </div>
+<form th:action="@{/ventas/listar}">
+    <label> Ingrese una venta para ver el detalle</label>
+    <input type="submit"><a class="btn btn-primary btn-xs" >Ver Compras</a></input>
+    <div class="form-control">
+        <div class="col-sm-6">
+            <input type="submit" th:value="${ventas.id}"  class="btn btn-primary">
+        </div>
+    </div>
+</form>
+
+
+
+
+
+<h1></h1>
 <div style="flex:auto">
-    <table>
+    <table class="table text-center">
         <thead>
             <tr>
                 <th scope="col">id Detalle</th>
@@ -48,19 +63,21 @@
                 <th scope="col">nombre producto</th>
                 <th scope="col">cantidad producto</th>
                 <th scope="col">valor producto</th>
+                <th scope="col">valor venta</th>
                 <th scope="col">id cliente</th>
             </tr>
         </thead>
-<!--        <tbody>
-            <tr th:each="venta: ${ventas}">
-                <td th:text="${venta.Id}"></td>
-                <td th:text="${venta.subtotal}"></td>
-                <td th:text="${venta.Nombre}"></td>
-                <td th:text="${venta.Apellido}"></td>
-                <td th:text="${venta.Pass}"></td>
-
+        <tbody>
+            <tr th:each="detalle: ${detalles}">
+                <td th:text="${detalle.id}"></td>
+                <td th:text="${detalle.productoMap.nombre}"></td>
+                
+                <td th:text="${detalle.cantidad}"></td>
+                <td th:text="${detalle.productoMap.precio}"></td>
+                <td th:text="${detalle.valorVenta}"></td>
+                <td th:text="${detalle.venta.cliente.id}"></td>
             </tr>
-        </tbody>-->
+        </tbody>
     </table>
 </div>
 

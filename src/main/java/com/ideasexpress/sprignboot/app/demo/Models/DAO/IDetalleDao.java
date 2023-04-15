@@ -9,4 +9,5 @@ public interface IDetalleDao {
     public void save(Detalle detalle);
     public Detalle findOne(Long id);
     public void delete(Long id);
+    public List<Detalle> findVentas(Long id);
 }

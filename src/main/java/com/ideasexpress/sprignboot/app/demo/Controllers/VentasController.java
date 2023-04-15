@@ -1,5 +1,7 @@
 package com.ideasexpress.sprignboot.app.demo.Controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-
+import com.ideasexpress.sprignboot.app.demo.Models.DAO.IDetalleDao;
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IVentasDao;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Ventas;
@@ -24,14 +26,17 @@ import com.ideasexpress.sprignboot.app.demo.Models.Entity.Ventas;
 public class VentasController {
     @Autowired
     private IVentasDao ventasDao;
-
+    @Autowired
+    private IDetalleDao detalleDao;
 
     @GetMapping("/listar/{id}")
     public String listar(@PathVariable(value="id")Long id,Model model){
 
         model.addAttribute("tituloP", "Ventas");
         model.addAttribute("ventas", ventasDao.findOneCliente(id));
-        
+
+        model.addAttribute("detalles", detalleDao.findVentas(id));//error
+
         return"/ventas/listar";
     }
     @GetMapping("/form") //Se ejecuta como caso de uso desde la web

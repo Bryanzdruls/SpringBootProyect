@@ -17,6 +17,7 @@ public class UserInfoUserDetailsService implements UserDetailsService{
     @Autowired
     private IClienteRepo repo;
 
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Cliente> cliente=repo.findByUsuario(username);

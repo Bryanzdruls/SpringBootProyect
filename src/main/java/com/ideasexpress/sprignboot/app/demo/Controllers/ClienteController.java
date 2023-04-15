@@ -85,7 +85,7 @@ public class ClienteController {
     }*/
 
     @GetMapping("/form/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String editar(@PathVariable(value = "id") Long id, Model model) {
 
         Cliente cliente = null;
@@ -103,7 +103,7 @@ public class ClienteController {
         return "form";
     }
     @GetMapping("/eliminar/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String eliminar(@PathVariable(value= "id") Long id, Model model)
     {
         if(id>0)clienteDao.delete(id);

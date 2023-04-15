@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,14 +29,19 @@ public class Detalle {
     @JoinColumn(name="Venta_id")
     private Ventas ventaMap;
 
-    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @OneToOne(cascade={CascadeType.ALL})
     @JoinColumn(name="producto_id")
     private Producto productoMap;
 
-
-   
-
     //metodos
+
+    public Producto getProductoMap() {
+        return productoMap;
+    }
+
+    public void setProductoMap(Producto productoMap) {
+        this.productoMap = productoMap;
+    }
 
     public Ventas getVentaMap() {
         return this.ventaMap;
@@ -45,13 +51,6 @@ public class Detalle {
         this.ventaMap = ventaMap;
     }
 
-    public Producto getProductoMap() {
-        return this.productoMap;
-    }
-
-    public void setProductoMap(Producto productoMap) {
-        this.productoMap = productoMap;
-    }
     public Detalle(){
     }
 
@@ -93,6 +92,8 @@ public class Detalle {
             " id='" + getId() + "'" +
             ", cantidad='" + getCantidad() + "'" +
             ", valorVenta='" + getValorVenta() + "'" +
+            ", valorVenta='" + getProductoMap() + "'" +
+            ", valorVenta='" + getVentaMap() + "'" +
             "}";
     }
     
@@ -103,4 +104,13 @@ public class Detalle {
     public void setVenta(Ventas venta) {
         this.ventaMap = venta;
     }
+    public Detalle( int cantidad, int valorVenta, Producto productoMap) {
+
+        this.cantidad = cantidad;
+        this.valorVenta = valorVenta;
+        this.productoMap=productoMap;
+    }
+
 }
+
+    
