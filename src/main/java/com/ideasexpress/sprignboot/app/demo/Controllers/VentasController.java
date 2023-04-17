@@ -1,6 +1,6 @@
 package com.ideasexpress.sprignboot.app.demo.Controllers;
 
-import java.util.List;
+
 
 import javax.validation.Valid;
 
@@ -31,9 +31,13 @@ public class VentasController {
 
     @GetMapping("/listar/{id}")
     public String listar(@PathVariable(value="id")Long id,Model model){
-
+        //ya sabemos que cliente es
+        
+        //ventasDao.subtotal(ventasDao.findOneCliente(id));
+        
         model.addAttribute("tituloP", "Ventas");
         model.addAttribute("ventas", ventasDao.findOneCliente(id));
+
 
         model.addAttribute("detalles", detalleDao.findVentas(id));//error
 

@@ -55,6 +55,14 @@ public class Cliente implements Serializable {
     @OneToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     private List<Ventas> ventaCliente;
 
+    //llena datos
+    public void ventasPorCliente(Ventas venta){
+        if(ventaCliente==null) ventaCliente = new ArrayList<>();
+        
+        ventaCliente.add(venta);
+        venta.setCliente(this);
+
+    }
     public String getRoles() {
         return Roles;
     }
@@ -89,14 +97,7 @@ public class Cliente implements Serializable {
     
 
 
-    public void ventasPorCliente(Ventas venta){
-        if(ventaCliente==null) ventaCliente = new ArrayList<>();
-        
-        ventaCliente.add(venta);
-        venta.setCliente(this);
-
-
-    }
+    
     
     public Long getId() {
         return Id;

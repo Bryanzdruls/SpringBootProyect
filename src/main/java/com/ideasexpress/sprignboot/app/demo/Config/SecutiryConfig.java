@@ -41,11 +41,15 @@ public class SecutiryConfig  {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf().disable().authorizeHttpRequests()
-            .antMatchers("/producto/**", "/cliente/**","cliente/form").permitAll()
+            .antMatchers("/producto/**", "/cliente/**","cliente/form","/h2-console/**").permitAll()
             .and()
             //.authorizeHttpRequests().antMatchers().authenticated()
             //.and()
             .formLogin()
+            .and()
+            .csrf().ignoringAntMatchers("/h2-console/**")
+            .and()
+            .headers().frameOptions().sameOrigin()
             .and().build();
 
 

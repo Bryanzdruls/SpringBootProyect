@@ -28,9 +28,9 @@
         
         <tbody>
             <tr th:each="venta: ${ventas}">
-                <td th:text="${venta.Id}"></td>
+                <td th:text="${venta.id}"></td>
                 <td th:text="${venta.cliente.id}"></td>               
-                <td th:text="${venta.subtotal}"></td>
+                <td th:text="${venta.detalle}"></td>
                 <td th:text="${venta.total}"></td>
                 <td th:text="${venta.fecha}"></td>
 
@@ -44,7 +44,7 @@
     <input type="submit"><a class="btn btn-primary btn-xs" >Ver Compras</a></input>
     <div class="form-control">
         <div class="col-sm-6">
-            <input type="submit" th:value="${ventas.id}"  class="btn btn-primary">
+            <input type="submit"   class="btn btn-primary">
         </div>
     </div>
 </form>
@@ -64,6 +64,7 @@
                 <th scope="col">cantidad producto</th>
                 <th scope="col">valor producto</th>
                 <th scope="col">valor venta</th>
+                <th scope="col">venta relacionada</th>
                 <th scope="col">id cliente</th>
             </tr>
         </thead>
@@ -72,9 +73,10 @@
                 <td th:text="${detalle.id}"></td>
                 <td th:text="${detalle.productoMap.nombre}"></td>
                 
-                <td th:text="${detalle.cantidad}"></td>
+                <td th:text="${detalle.productoMap.unidades}"></td>
                 <td th:text="${detalle.productoMap.precio}"></td>
-                <td th:text="${detalle.valorVenta}"></td>
+                <td th:text="${detalle.productoMap.precio*detalle.productoMap.unidades}"></td>
+                <td th:text="${detalle.ventaMap.id}"></td>
                 <td th:text="${detalle.venta.cliente.id}"></td>
             </tr>
         </tbody>

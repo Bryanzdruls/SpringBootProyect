@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.ClienteDaoImp;
+import com.ideasexpress.sprignboot.app.demo.Models.DAO.DetalleDaoImp;
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.ProductoDaoImp;
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.VentasDaoImp;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
@@ -21,12 +22,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Transactional
 public class Insercion {
+    
     @Autowired
     private final ClienteDaoImp clienteDaoImp;
     @Autowired
     private final VentasDaoImp ventasDaoImp;
     @Autowired
     private final ProductoDaoImp productoDaoImp;
+    @Autowired
+    private final DetalleDaoImp detalleDaoImp;
     
     @Transactional
     public void ventasPorCliente(){
@@ -41,10 +45,10 @@ public class Insercion {
 
 
         //se decalran las ventas
-        Ventas venta1=new Ventas(new Date(),2000,2000);       
-        Ventas venta2=new Ventas(new Date(),20,20);
-        Ventas venta3=new Ventas(new Date(),30,30);
-        Ventas venta4=new Ventas(new Date(),500,500);
+        Ventas venta1=new Ventas(new Date(),0,0);       
+        Ventas venta2=new Ventas(new Date(),0,0);
+        Ventas venta3=new Ventas(new Date(),0,0);
+        Ventas venta4=new Ventas(new Date(),0,0);
         //se guardan las ventas
         ventasDaoImp.save(venta1);
         ventasDaoImp.save(venta2);
@@ -53,8 +57,8 @@ public class Insercion {
 
         //se relacionan las ventas
         cliente1.ventasPorCliente(venta1);
+        cliente1.ventasPorCliente(venta2);
 
-        cliente2.ventasPorCliente(venta2);
         cliente2.ventasPorCliente(venta3);
         cliente2.ventasPorCliente(venta4);
         //cliente1.ventaCliente(venta1);
@@ -75,18 +79,34 @@ public class Insercion {
         Detalle detalle2 = new Detalle(producto2.getUnidades(),producto2.getPrecio()*producto2.getUnidades(),producto2);
         Detalle detalle3 = new Detalle(producto3.getUnidades(),producto3.getPrecio()*producto3.getUnidades(),producto3);
         Detalle detalle4 = new Detalle(producto4.getUnidades(),producto4.getPrecio()*producto4.getUnidades(),producto4);
-
-        //Se relaciona el detalle con la venta
-        venta2.detallesDeVenta(detalle1);
-        venta2.detallesDeVenta(detalle2);
-        venta2.detallesDeVenta(detalle3);
-
-        venta1.detallesDeVenta(detalle2);
-        venta1.detallesDeVenta(detalle4);
+        Detalle detalle5 = new Detalle(producto3.getUnidades(),producto3.getPrecio()*producto3.getUnidades(),producto3);
+        Detalle detalle6 = new Detalle(producto4.getUnidades(),producto4.getPrecio()*producto4.getUnidades(),producto4);
+        /*Detalle detalle1 = new Detalle(0,0, producto1);
+        Detalle detalle2 = new Detalle(0,0,producto2);
+        Detalle detalle3 = new Detalle(0,0,producto3);
+        Detalle detalle4 = new Detalle(0,0,producto4);*/
         
-    }
-    
-    public void detallesPorVenta(){
+        detalleDaoImp.save(detalle1);
+        detalleDaoImp.save(detalle2);
+        detalleDaoImp.save(detalle3);
+        detalleDaoImp.save(detalle4);
+        detalleDaoImp.save(detalle5);
+        detalleDaoImp.save(detalle6);
+        //Se relaciona el detalle con la venta
+        
+        venta1.detallesDeVenta(detalle1);
+        venta1.detallesDeVenta(detalle2);
+
+        venta2.detallesDeVenta(detalle3);
+        venta2.detallesDeVenta(detalle4);
+
+
+        venta3.detallesDeVenta(detalle5);
+
+        venta4.detallesDeVenta(detalle6);
+
+        //venta2.setSubtotal(detalle1.getValorVenta()+detalle2.getValorVenta()+detalle3.getValorVenta());
+        
         
     }
        

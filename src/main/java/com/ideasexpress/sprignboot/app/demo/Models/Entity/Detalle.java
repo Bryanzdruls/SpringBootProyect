@@ -92,8 +92,8 @@ public class Detalle {
             " id='" + getId() + "'" +
             ", cantidad='" + getCantidad() + "'" +
             ", valorVenta='" + getValorVenta() + "'" +
-            ", valorVenta='" + getProductoMap() + "'" +
-            ", valorVenta='" + getVentaMap() + "'" +
+            ", producto='" + getProductoMap() + "'" +
+            ", venta='" + getVentaMap() + "'" +
             "}";
     }
     

@@ -51,6 +51,14 @@ public class Ventas {
     @OneToMany(mappedBy="ventaMap", cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     private List<Detalle> detalle;
 
+    public List<Detalle> getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(List<Detalle> detalle) {
+        this.detalle = detalle;
+    }
+
     @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinColumn(name="id_cliente")
     private Cliente cliente;

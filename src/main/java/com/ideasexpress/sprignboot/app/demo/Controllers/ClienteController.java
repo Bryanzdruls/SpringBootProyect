@@ -36,14 +36,15 @@ public class ClienteController {
     @Autowired
     private Insercion insercion;
 
-    int sw=0;
+    private int sw=0;
     @GetMapping("/listar")
     public String listar(Model model) {
         if(sw==0){
             insercion.ventasPorCliente();
             sw++;
         };
-        
+        System.out.println(clienteDao.findOne(new Long(1)).toString());
+
         model.addAttribute("titulo", "Listado de Clientes");
         model.addAttribute("clientes", clienteDao.findAll());
         return "listar";

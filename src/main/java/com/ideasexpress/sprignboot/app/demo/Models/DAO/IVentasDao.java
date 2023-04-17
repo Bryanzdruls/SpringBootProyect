@@ -2,7 +2,6 @@ package com.ideasexpress.sprignboot.app.demo.Models.DAO;
 
 import java.util.List;
 
-import com.ideasexpress.sprignboot.app.demo.Models.Entity.Cliente;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Ventas;
 
 public interface IVentasDao {
@@ -11,5 +10,7 @@ public interface IVentasDao {
     public Ventas findOne(Long id);
     public void delete(Long id);
     public List<Ventas> findOneCliente(Long id);
+
+    public int subtotal(List<Ventas>ventas);
 
 }
