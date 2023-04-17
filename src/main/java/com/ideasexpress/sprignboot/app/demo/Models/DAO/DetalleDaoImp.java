@@ -49,10 +49,18 @@ public class DetalleDaoImp implements IDetalleDao {
 
     @Override
     public List<Detalle> findVentas(Long id) {
-        String sql= "select Ventas.Cliente_Id from Ventas ve INNER JOIN  ve.Detalle D where ve.id_venta =:id";
-        String sicual="SELECT Ventas.Cliente_Id FROM Ventas INNER JOIN detalle ON Ventas.id_venta= Detalle.id_venta where Ventas.id_venta=:";
-        return em.createQuery(sql)
-        .setParameter("id", id)
-        .getResultList();
+        /*return em.createQuery("from detalle d join d.ventas v where v.id_venta = d.venta_id", Detalle.class)
+        .setParameter("id_venta", id)
+        .getResultList();*/
+
+        String jpql = "SELECT d FROM detalle d " +
+              "JOIN d.ventas v " +
+              "WHERE v.id_venta = :id_venta";
+
+        List<Detalle> detalles = em.createQuery(jpql, Detalle.class)
+                       .setParameter("id_venta", id)
+                       .getResultList();
+
+        return detalles;
     }
 }

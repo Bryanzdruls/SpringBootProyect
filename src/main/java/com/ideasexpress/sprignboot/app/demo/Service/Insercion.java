@@ -75,12 +75,12 @@ public class Insercion {
         productoDaoImp.save(producto3);
         productoDaoImp.save(producto4);
         //se crea el detalle
-        Detalle detalle1 = new Detalle(producto1.getUnidades(),producto1.getPrecio()*producto1.getUnidades(), producto1);
-        Detalle detalle2 = new Detalle(producto2.getUnidades(),producto2.getPrecio()*producto2.getUnidades(),producto2);
-        Detalle detalle3 = new Detalle(producto3.getUnidades(),producto3.getPrecio()*producto3.getUnidades(),producto3);
-        Detalle detalle4 = new Detalle(producto4.getUnidades(),producto4.getPrecio()*producto4.getUnidades(),producto4);
-        Detalle detalle5 = new Detalle(producto3.getUnidades(),producto3.getPrecio()*producto3.getUnidades(),producto3);
-        Detalle detalle6 = new Detalle(producto4.getUnidades(),producto4.getPrecio()*producto4.getUnidades(),producto4);
+        Detalle detalle1 = new Detalle(producto1.getUnidades()-5,producto1.getPrecio()*producto1.getUnidades(), producto1);
+        Detalle detalle2 = new Detalle(producto2.getUnidades()-6,producto2.getPrecio()*producto2.getUnidades(),producto2);
+        Detalle detalle3 = new Detalle(producto3.getUnidades()-7,producto3.getPrecio()*producto3.getUnidades(),producto3);
+        Detalle detalle4 = new Detalle(producto4.getUnidades()-8,producto4.getPrecio()*producto4.getUnidades(),producto4);
+        Detalle detalle5 = new Detalle(producto3.getUnidades()-8,producto3.getPrecio()*producto3.getUnidades(),producto3);
+        Detalle detalle6 = new Detalle(producto4.getUnidades()-8,producto4.getPrecio()*producto4.getUnidades(),producto4);
         /*Detalle detalle1 = new Detalle(0,0, producto1);
         Detalle detalle2 = new Detalle(0,0,producto2);
         Detalle detalle3 = new Detalle(0,0,producto3);
