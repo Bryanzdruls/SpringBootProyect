@@ -32,14 +32,13 @@ public class VentasController {
     @GetMapping("/listar/{id}")
     public String listar(@PathVariable(value="id")Long id,Model model){
         //ya sabemos que cliente es
-        
-        //ventasDao.subtotal(ventasDao.findOneCliente(id));
+
+        ventasDao.subTotalList(ventasDao.findOneCliente(id), detalleDao.findVentas(id));
         
         model.addAttribute("tituloP", "Ventas");
         model.addAttribute("ventas", ventasDao.findOneCliente(id));
-
-
-        model.addAttribute("detalles", detalleDao.findVentas(id));//error
+        model.addAttribute("detalles", detalleDao.findVentas(id));
+        model.addAttribute("total", ventasDao.totalFactura(ventasDao.findOneCliente(id)));
 
         return"/ventas/listar";
     }

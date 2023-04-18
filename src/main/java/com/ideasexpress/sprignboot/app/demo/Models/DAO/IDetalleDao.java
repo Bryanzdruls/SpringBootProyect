@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Detalle;
 
+
 public interface IDetalleDao {
     public List<Detalle> findAll();
     public void save(Detalle detalle);

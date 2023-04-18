@@ -10,10 +10,12 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -25,34 +27,32 @@ public class SecutiryConfig  {
 
     @Bean
     //authentication
-    public UserDetailsService userDetailsService(){
-        /*UserDetails admin = User.withUsername("brian")
+    public UserDetailsService userDetailsService(PasswordEncoder encoder){
+        UserDetails admin = User.withUsername("brian")
                                 .password(encoder.encode("123"))
                                 .roles("ADMIN")
                                 .build();
-        UserDetails user = User.withUsername("lucho")
+        UserDetails user = User.withUsername("juan")
                                 .password(encoder.encode("123"))
                                 .roles("USER")
                                 .build();
-        return new InMemoryUserDetailsManager(admin,user);*/
-        return new UserInfoUserDetailsService();
+        return new InMemoryUserDetailsManager(admin,user);
+        //return new UserInfoUserDetailsService();
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf().disable().authorizeHttpRequests()
-            .antMatchers("/producto/**", "/cliente/**","cliente/form","/h2-console/**").permitAll()
+            .antMatchers( "/cliente/**","cliente/form","/h2-console/**").permitAll()
             .and()
-            //.authorizeHttpRequests().antMatchers().authenticated()
-            //.and()
+            .authorizeHttpRequests().antMatchers("/producto/**").authenticated()
+            .and()
             .formLogin()
             .and()
             .csrf().ignoringAntMatchers("/h2-console/**")
             .and()
             .headers().frameOptions().sameOrigin()
             .and().build();
-
-
     }
 
     @Bean
@@ -60,12 +60,12 @@ public class SecutiryConfig  {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+   /* @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authenticationProvider= new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
-    }
+    } */
 
 }

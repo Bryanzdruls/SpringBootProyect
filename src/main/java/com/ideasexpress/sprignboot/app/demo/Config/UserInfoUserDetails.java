@@ -1,4 +1,4 @@
-package com.ideasexpress.sprignboot.app.demo.Config;
+/*package com.ideasexpress.sprignboot.app.demo.Config;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -62,3 +62,4 @@ public class UserInfoUserDetails implements UserDetails {
     }
     
 }
+*/

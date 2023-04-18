@@ -30,8 +30,8 @@
             <tr th:each="venta: ${ventas}">
                 <td th:text="${venta.id}"></td>
                 <td th:text="${venta.cliente.id}"></td>               
-                <td th:text="${venta.detalle}"></td>
-                <td th:text="${venta.total}"></td>
+                <td th:text="${venta.subtotal}"></td>
+                <td th:text="${venta.subtotal*1.19}"></td>
                 <td th:text="${venta.fecha}"></td>
 
             </tr>
@@ -39,17 +39,9 @@
     </table>
 
 </div>
-<form th:action="@{/ventas/listar}">
-    <label> Ingrese una venta para ver el detalle</label>
-    <input type="submit"><a class="btn btn-primary btn-xs" >Ver Compras</a></input>
-    <div class="form-control">
-        <div class="col-sm-6">
-            <input type="submit"   class="btn btn-primary">
-        </div>
-    </div>
-</form>
 
 
+<h1>DETALLES</h1>
 
 
 
@@ -71,8 +63,7 @@
         <tbody>
             <tr th:each="detalle: ${detalles}">
                 <td th:text="${detalle.id}"></td>
-                <td th:text="${detalle.productoMap.nombre}"></td>
-                
+                <td th:text="${detalle.productoMap.nombre}+' ' + ${detalle.productoMap.descripcion}"></td>              
                 <td th:text="${detalle.cantidad}"></td>
                 <td th:text="${detalle.productoMap.precio}"></td>
                 <td th:text="${detalle.productoMap.precio*detalle.productoMap.unidades}"></td>
@@ -81,6 +72,26 @@
             </tr>
         </tbody>
     </table>
+
+    <h1>FACTURA</h1>
+    <div>
+        <table class="table text-center" style="float:right; margin: left 20px;">
+            <thead>
+                <tr>
+                    <th scope="col">subtotal</th>
+                    <th scope="col">total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr >
+                    <td th:text="${total}"></td>
+                    <td th:text="${total*1.19}"></td>
+    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 </body>

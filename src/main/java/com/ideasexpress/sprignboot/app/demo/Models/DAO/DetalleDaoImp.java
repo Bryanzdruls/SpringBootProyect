@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Detalle;
 
+
 @Repository
 public class DetalleDaoImp implements IDetalleDao {
 
@@ -49,18 +50,11 @@ public class DetalleDaoImp implements IDetalleDao {
 
     @Override
     public List<Detalle> findVentas(Long id) {
-        /*return em.createQuery("from detalle d join d.ventas v where v.id_venta = d.venta_id", Detalle.class)
-        .setParameter("id_venta", id)
-        .getResultList();*/
+        return em.createQuery("from Detalle as d inner join fetch d.ventaMap where id_cliente like:id"
 
-        String jpql = "SELECT d FROM detalle d " +
-              "JOIN d.ventas v " +
-              "WHERE v.id_venta = :id_venta";
-
-        List<Detalle> detalles = em.createQuery(jpql, Detalle.class)
-                       .setParameter("id_venta", id)
-                       .getResultList();
-
-        return detalles;
+        , Detalle.class)
+        .setParameter("id", id)
+        .getResultList();
+        
     }
 }

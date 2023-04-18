@@ -32,24 +32,28 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_cliente")
     private Long Id;
-    //@NotEmpty(message = "Debes especificar el Usuario")
+
+    @NotEmpty(message = "Debes especificar el Usuario")
     private String usuario;
-    //@NotEmpty(message = "Debes especificar el Nombre")
+
+    @NotEmpty(message = "Debes especificar el Nombre")
     private String Nombre;
-    //@NotEmpty (message = "Debes especificar el Apellido")
-    //@Size(message = "El apellido deber medir entre 1 y 50")
+    @NotEmpty (message = "Debes especificar el Apellido")
+    @Size(message = "El apellido deber medir entre 1 y 50")
     private String Apellido;
+
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    // @NotNull (message = "campo requerido")
+    @NotNull (message = "campo requerido")
     private Date CreateAt;
     @Email
-    //@NotEmpty(message = "Debes rellenar este campo")
+    @NotEmpty(message = "Debes rellenar este campo")
     private String Email;
-   // @NotEmpty(message = "Debes rellenar este campo")
+
+    @NotEmpty(message = "Debes rellenar este campo")
     private String Pass;
-    //@NotEmpty(message = "Debes rellenar este campo")
+    @NotEmpty(message = "Debes rellenar este campo")
     private String Roles;
 
     @OneToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
