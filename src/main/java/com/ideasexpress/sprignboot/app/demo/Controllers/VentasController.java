@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.ideasexpress.sprignboot.app.demo.Models.DAO.IClienteDao;
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IDetalleDao;
+import com.ideasexpress.sprignboot.app.demo.Models.DAO.IProductoDao;
 import com.ideasexpress.sprignboot.app.demo.Models.DAO.IVentasDao;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Ventas;
@@ -28,6 +30,10 @@ public class VentasController {
     private IVentasDao ventasDao;
     @Autowired
     private IDetalleDao detalleDao;
+    @Autowired
+    private IProductoDao productoDao;
+    @Autowired
+    private IClienteDao clienteDao;
 
     @GetMapping("/listar/{id}")
     public String listar(@PathVariable(value="id")Long id,Model model){
@@ -42,30 +48,40 @@ public class VentasController {
 
         return"/ventas/listar";
     }
-    @GetMapping("/form") //Se ejecuta como caso de uso desde la web
-    public String crear(Model model){
+    @GetMapping("/form/{id}") //Se ejecuta como caso de uso desde la web
+    public String crear(@PathVariable(value="id")Long id,Model model){
         Ventas venta = new Ventas();
-        model.addAttribute("titulo", "Formulario de Productos");
-        model.addAttribute("valor", "Crear producto");
-        model.addAttribute("producto", venta);
+        
+
+        model.addAttribute("titulo", "Formulario de venta");
+        model.addAttribute("valor", "Crear venta");
+        model.addAttribute("cliente", clienteDao.findOne(id));
+        model.addAttribute("ventas", venta);
+
+        model.addAttribute("productos", productoDao.findAll());
         return "ventas/form";
     }
+
+
+
     @PostMapping(value="form") //Se ejecuta despues del Get Mapping
     public String guardar(@Valid Ventas venta, BindingResult bindingResult, SessionStatus status, Model model){
         if(bindingResult.hasErrors()){
-            model.addAttribute("titulo", "Formulario de productos");
-                model.addAttribute("valor", "Crear producto");
-                model.addAttribute("producto", venta);
-                return "/ventas/form";
 
+                
+                model.addAttribute("titulo", "Formulario de ventas");
+                model.addAttribute("valor", "Crear ventas");
+                model.addAttribute("ventas", venta);
+                return "/ventas/form";
         }
+        System.out.println(venta);
         ventasDao.save(venta);
         status.setComplete();
         //return "redirect:producto/listar";            //no funciona estando dentro de una carpeta
         return "redirect:/ventas/listar";    //metodo para redirigir cuando se esta dentro de una carpeta
 
     }
-    @GetMapping("/form/{id}")
+   /* @GetMapping("/form/{id}")
     public String editar(@PathVariable(value = "id") Long id,Model model){
         Ventas venta = null;
         if(id>0){
@@ -77,7 +93,7 @@ public class VentasController {
         model.addAttribute("valor", "Editar producto");
         model.addAttribute("producto", venta);
         return "ventas/form";
-    }
+    } */
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable(value = "id") Long id, Model model){
         if(id>0)ventasDao.delete(id);

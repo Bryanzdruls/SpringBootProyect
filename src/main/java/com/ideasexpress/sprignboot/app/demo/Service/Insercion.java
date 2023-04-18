@@ -69,6 +69,8 @@ public class Insercion {
         Producto producto3 = new Producto(100, 90, "Bicileta", "muy linda");
         Producto producto4 = new Producto(100, 80, "Especial", "muy linda");
 
+        Producto producto5 = new Producto(100, 80, "Prueba", "Form");
+
         //se guardan los productos en la base de datos
         productoDaoImp.save(producto1);
         productoDaoImp.save(producto2); 

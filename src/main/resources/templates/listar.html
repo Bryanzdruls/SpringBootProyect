@@ -59,6 +59,7 @@
                 <td th:text="${cliente.Pass}"></td>
                 <td th:text="${cliente.Email}"></td>
                 <td th:text="${cliente.CreateAt}"></td>
+                <td><a class="btn btn-primary btn-xs" th:href="@{/ventas/form/}+${cliente.Id}">Comprar</a></td>
                 <td><a class="btn btn-primary btn-xs" th:href="@{/ventas/listar/}+${cliente.Id}">Ver Compras</a></td>
                 <td><a class="btn btn-primary btn-xs" th:href="@{/cliente/form/}+${cliente.Id}">Editar</a></td>
                 <td><a class="btn btn-danger btn-xs" th:href="@{/cliente/eliminar/}+${cliente.Id}"

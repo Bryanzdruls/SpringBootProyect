@@ -37,39 +37,56 @@
     <h1 th:text="${titulo}" class="text-center"></h1>
     <br>
 
+
+    <form th:action="@{/ventas/listar/}"  th:object="${cliente}" method="post" >
+        <div style="text-align:center;">
+            <h2>Seleccione el id del producto que quiere comprar</h2>
+            <input type="text">
+            <a class="btn btn-primary btn-xs" th:href="@{/ventas/listar/}+${cliente.Id}">Comprar</a>
+        </div>
+    </form>
+
     <div class="container">
-    <form th:action="@{/producto/form}" th:object="${producto}" method="post">
+    <form th:action="@{/ventas/form}" th:object="${ventas}" method="post">
+
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Unidades</th>            
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="venta: ${ventas}">
+                    <td th:text="${venta.subtotal}"></td>
+                    <td th:text="${venta.total}"></td>
+                    
+                </tr>
+            </tbody>
+
+        </table>
     <div class="form-control">
-          <label class="col-sm-2 col-form-label">Nombre</label>
+          <label class="col-sm-2 col-form-label">subtotal</label>
                 <div class="col-sm-6">
-                   <input type="text" th:field="*{nombre}" class="form-control" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
-                   <div class="invalid-feedback" th:errors="*{nombre}"></div>
+                   <input type="text" th:field="*{subtotal}" class="form-control">
        </div>
         <div class="form-control">
-            <label class="col-sm-2 col-form-label">Descripcion</label>
+            <label class="col-sm-2 col-form-label">total</label>
             <div class="col-sm-6">
-                <input type="text" th:field="*{descripcion}" class="form-control" th:classappend="${#fields.hasErrors('descripcion')} ? 'is-invalid' : ''">
-                <div class="invalid-feedback" th:errors="*{descripcion}"></div>
-            </div>
-        </div>
-        <div class="form-control">
-            <label class="col-sm-2 col-form-label">precio</label>
-            <div class="col-sm-6">
-                <input type="number" th:field="*{precio}" class="form-control">
-            </div>
-        </div>
-        <div class="form-control">
-            <label class="col-sm-2 col-form-label">unidades</label>
-            <div class="col-sm-6">
-                <input type="number" th:field="*{unidades}" class="form-control">
+                <input type="text" th:field="*{total}" class="form-control">
             </div>
         </div>
         <div class="form-control">
             <div class="col-sm-6">
                 <input type="submit" th:value="${valor}" class="btn btn-primary">
             </div>
-        </div>
+        </div>       
+
         
+
        <!-- <table class="table text-center">
             <tr>
                 <td>Nombre</td>
