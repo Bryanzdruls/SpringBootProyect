@@ -127,6 +127,16 @@ public class Detalle {
         this.productoMap = productoMap;
     }
 
+    public Detalle(int cantidad, int valorVenta,  Producto productoMap ,Ventas ventaMap) {
+
+        this.cantidad = cantidad;
+        this.valorVenta = valorVenta;
+        this.ventaMap = ventaMap;
+        this.productoMap = productoMap;
+    }
+    public int precioTotal(){
+        return this.getCantidad()*this.getProductoMap().getPrecio();
+    }
 }
 
     

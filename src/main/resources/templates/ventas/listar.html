@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link  th:href="@{/css/style.css}">
     <title th:text="${tituloP}">Document</title>
 </head>
 <body>
@@ -66,7 +67,7 @@
                 <td th:text="${detalle.productoMap.nombre}+' ' + ${detalle.productoMap.descripcion}"></td>              
                 <td th:text="${detalle.cantidad}"></td>
                 <td th:text="${detalle.productoMap.precio}"></td>
-                <td th:text="${detalle.productoMap.precio*detalle.productoMap.unidades}"></td>
+                <td th:text="${detalle.productoMap.precio*detalle.cantidad}"></td>
                 <td th:text="${detalle.ventaMap.id}"></td>
                 <td th:text="${detalle.venta.cliente.id}"></td>
             </tr>

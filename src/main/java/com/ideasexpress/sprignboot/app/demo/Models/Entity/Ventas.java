@@ -59,7 +59,7 @@ public class Ventas {
         this.detalle = detalle;
     }
 
-    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinColumn(name="id_cliente")
     private Cliente cliente;
 
@@ -96,6 +96,7 @@ public class Ventas {
             ", subtotal='" + getSubtotal() + "'" +
             ", total='" + getTotal() + "'" +
             ", detalle='" + getDetalle() + "'" +
+            ", cliente='" + getCliente().getId() + "'" +
             "}";
     }
     public Long getId() {

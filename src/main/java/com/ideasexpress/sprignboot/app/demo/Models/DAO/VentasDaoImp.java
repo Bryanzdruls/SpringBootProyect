@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Detalle;
+import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Ventas;
 
 
@@ -63,15 +64,16 @@ public class VentasDaoImp  implements IVentasDao{
         .getResultList();
     }
 
-    @Override
+    @Override //producto x cantidad
     public int totalFactura(List<Ventas> ventas) {
         return ventas.stream().flatMap(venta -> venta.getDetalle().stream())
-                        .mapToInt(Detalle::getValorVenta)
+                        .mapToInt(Detalle::precioTotal)
                         .filter(valorventa ->  valorventa >=0)
                         .sum();
     }
 
-    /*public List<Integer> subTotalList(List<Ventas> ventas,List<Detalle> detalles){
+    @Override
+    public List<Integer> subTotalList(List<Ventas> ventas,List<Detalle> detalles){
         int menor=  ventas.stream()
         .mapToInt(venta ->(int)(long)venta.getId())
         .min()
@@ -93,7 +95,7 @@ public class VentasDaoImp  implements IVentasDao{
                 detalle =detalles.stream().filter(d ->d.getVenta().getId() == j)//1
                 .collect(Collectors.toList());
     
-                sum=detalle.stream().mapToInt(d->d.getValorVenta())
+                sum=detalle.stream().mapToInt(d->d.precioTotal())
                                     .sum();
 
                 System.out.println(sum);
@@ -110,7 +112,7 @@ public class VentasDaoImp  implements IVentasDao{
                 detalle =detalles.stream().filter(d ->d.getVenta().getId() == j)//1
                 .collect(Collectors.toList());
     
-                sum=detalle.stream().mapToInt(d->d.getValorVenta())
+                sum=detalle.stream().mapToInt(d->d.precioTotal())
                                     .sum();
                 System.out.println(sum);
                 //System.out.println(ventas.get(i-1).toString());
@@ -119,6 +121,6 @@ public class VentasDaoImp  implements IVentasDao{
         }
 
         return null;
-    }*/
+    }
 }
 

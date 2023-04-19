@@ -138,6 +138,4 @@ public class Producto implements Serializable {
     public void restarUnidades(int res) {
         this.unidades -= res;
     }
-
-
 }

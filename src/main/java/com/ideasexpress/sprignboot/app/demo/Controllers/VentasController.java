@@ -3,6 +3,7 @@ package com.ideasexpress.sprignboot.app.demo.Controllers;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -69,7 +70,7 @@ public class VentasController {
         //ya sabemos que cliente es
 
         
-        //ventasDao.subTotalList(ventasDao.findOneCliente(id), detalleDao.findVentas(id));
+        ventasDao.subTotalList(ventasDao.findOneCliente(id), detalleDao.findVentas(id));
         
         model.addAttribute("tituloP", "Ventas");
         model.addAttribute("ventas", ventasDao.findOneCliente(id));
@@ -230,20 +231,27 @@ public class VentasController {
             // Creamos un nuevo producto que será el que se guarda junto con la venta
             
     
-            Detalle detalleProducto = new Detalle(productoParaVender.getId(), productoParaVender.getCantidad(), productoParaVender.getValorVenta(), p, v);
+            Detalle detalleProducto = new Detalle(productoParaVender.getCantidad(), productoParaVender.getValorVenta(), p, v);
             // Y lo guardamos
             det = detalleProducto;
+            v.setFecha(new Date());
 
-
-            detalleProducto.setVenta(v);
-            v.detallesDeVenta(detalleProducto);
-            ventasDao.save(v);
+            /*detalleProducto.setVenta(v);
+            v.detallesDeVenta(detalleProducto);*/
+            v.setCliente(cliente);
+            /*ventasDao.save(v);
+            clienteDao.save(cliente);*/
+            System.out.println(detalleProducto);
+            System.out.println(v);
+            
+            detalleRepo.save(detalleProducto);
             
             //productoNuevo.save(productovendido);
         }
-            detalleRepo.save(det);
-            System.out.println(v.toString());
-            System.out.println(v.getDetalle());
+            //detalleRepo.save(det);
+            //System.out.println(v.toString());
+            //System.out.println(cliente);
+            //System.out.println(v.getDetalle());
         // Al final limpiamos el carrito
 
         this.limpiarCanasta(request);
