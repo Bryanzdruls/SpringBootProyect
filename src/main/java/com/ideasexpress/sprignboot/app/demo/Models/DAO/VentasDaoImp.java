@@ -71,7 +71,7 @@ public class VentasDaoImp  implements IVentasDao{
                         .sum();
     }
 
-    public List<Integer> subTotalList(List<Ventas> ventas,List<Detalle> detalles){
+    /*public List<Integer> subTotalList(List<Ventas> ventas,List<Detalle> detalles){
         int menor=  ventas.stream()
         .mapToInt(venta ->(int)(long)venta.getId())
         .min()
@@ -119,6 +119,6 @@ public class VentasDaoImp  implements IVentasDao{
         }
 
         return null;
-    }
+    }*/
 }
 

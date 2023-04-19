@@ -39,7 +39,7 @@ public class ClienteController {
     @GetMapping("/listar")
     public String listar(Model model) {
         if(sw==0){
-            insercion.ventasPorCliente();
+            //insercion.ventasPorCliente();
             sw++;
         };
         //System.out.println(clienteDao.findOne(new Long(1)).toString());

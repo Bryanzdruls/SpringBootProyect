@@ -15,8 +15,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "productos") // Nombre Tablas
 
 public class Producto implements Serializable {
+    
     // Atributos
-
     @Id
     // @GeneratedValue(strategy= GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,23 +32,7 @@ public class Producto implements Serializable {
     @NotBlank(message = "Ingrese la descripcion del producto")
     private String descripcion;
 
-
-
-    //@OneToOne(mappedBy = "productoMap",cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
-    //@JoinColumn(name="id_Detalle")
-    //private Detalle detallesDeProducto;
-
-
-   /*  public void prouctosPorDetalle(Detalle detalle){
-        if(detallesDeProducto==null) detallesDeProducto = new ArrayList<>();
-
-        detallesDeProducto.add(detalle);
-
-        detalle.setProductoMap(this);
-    }*/
-
     public Producto(){
-
     }
     public Long getId() {
         return id;
@@ -90,16 +74,20 @@ public class Producto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    // @Column(name =)
 
+    public Producto(int precio, int unidades, String nombre, String descripcion,Long id) {
+        this.precio = precio;
+        this.unidades = unidades;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.id=id;
+    }
     public Producto(int precio, int unidades, String nombre, String descripcion) {
         this.precio = precio;
         this.unidades = unidades;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        //this.detallesDeProducto = detallesDeProducto;
     }
-    
 
     public Producto(Long id, int precio, int unidades, String nombre, String descripcion) {
         this.id = id;
@@ -144,5 +132,12 @@ public class Producto implements Serializable {
             ", descripcion='" + getDescripcion() + "'" +
             "}";
     }
+    public boolean sinExistencia() {
+        return this.unidades <= 0;
+    }
+    public void restarUnidades(int res) {
+        this.unidades -= res;
+    }
+
 
 }

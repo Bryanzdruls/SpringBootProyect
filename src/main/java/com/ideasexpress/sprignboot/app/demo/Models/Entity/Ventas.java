@@ -95,7 +95,7 @@ public class Ventas {
             " id='" + getId() + "'" +
             ", subtotal='" + getSubtotal() + "'" +
             ", total='" + getTotal() + "'" +
-            
+            ", detalle='" + getDetalle() + "'" +
             "}";
     }
     public Long getId() {

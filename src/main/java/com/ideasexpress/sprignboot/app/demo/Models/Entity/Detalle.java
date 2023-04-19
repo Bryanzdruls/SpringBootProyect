@@ -25,7 +25,7 @@ public class Detalle {
     public int valorVenta;
 
 
-    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinColumn(name="Venta_id")
     private Ventas ventaMap;
 
@@ -93,7 +93,6 @@ public class Detalle {
             ", cantidad='" + getCantidad() + "'" +
             ", valorVenta='" + getValorVenta() + "'" +
             ", producto='" + getProductoMap() + "'" +
-            ", venta='" + getVentaMap() + "'" +
             "}";
     }
     
@@ -104,11 +103,28 @@ public class Detalle {
     public void setVenta(Ventas venta) {
         this.ventaMap = venta;
     }
-    public Detalle( int cantidad, int valorVenta, Producto productoMap) {
+    public Detalle(int cantidad, int valorVenta, Producto productoMap) {
 
         this.cantidad = cantidad;
         this.valorVenta = valorVenta;
         this.productoMap=productoMap;
+    }
+    public Detalle(Long id,int cantidad, int valorVenta, Producto productoMap) {
+        this.id = id;
+        this.cantidad = cantidad;
+        this.valorVenta = valorVenta;
+        this.productoMap=productoMap;
+    }
+    public void aumentarCantidad() {
+        this.cantidad++;
+    }
+
+    public Detalle(Long id, int cantidad, int valorVenta,  Producto productoMap ,Ventas ventaMap) {
+        this.id = id;
+        this.cantidad = cantidad;
+        this.valorVenta = valorVenta;
+        this.ventaMap = ventaMap;
+        this.productoMap = productoMap;
     }
 
 }

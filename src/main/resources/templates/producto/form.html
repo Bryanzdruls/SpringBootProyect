@@ -20,16 +20,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Producto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Otra</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">cosa</a>
-                    </li>
-                </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/cliente/listar}">clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/ventas/ventasGeneral}">Ventas</a>
+                        </li>
+                    </ul>
             </div>
         </div>
     </nav>

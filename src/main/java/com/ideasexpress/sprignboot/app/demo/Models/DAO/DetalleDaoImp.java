@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ideasexpress.sprignboot.app.demo.Models.Entity.Detalle;
+import com.ideasexpress.sprignboot.app.demo.Models.Entity.Producto;
 
 
 @Repository
@@ -56,5 +57,11 @@ public class DetalleDaoImp implements IDetalleDao {
         .setParameter("id", id)
         .getResultList();
         
+    }
+
+    @Override
+    public void unirProd(Producto producto) {
+        System.out.println("el producto "+ producto.toString());
+        Detalle detalle =  new Detalle(0, 0, producto);
     }
 }

@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid ">
-            <a class="navbar-brand " href="#">Productos</a>
+            <a class="navbar-brand " href="#">Ventas</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,13 +21,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Producto</a>
+                        <a class="nav-link" th:href="@{/cliente/listar}">cliente</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Otra</a>
+                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">cosa</a>
+                        <a class="nav-link" th:href="@{/ventas/ventasGeneral}">Ventas</a>
                     </li>
                 </ul>
             </div>
@@ -38,16 +38,6 @@
     <br>
 
 
-    <form th:action="@{/ventas/listar/}"  th:object="${cliente}" method="post" >
-        <div style="text-align:center;">
-            <h2>Seleccione el id del producto que quiere comprar</h2>
-            <input type="text">
-            <a class="btn btn-primary btn-xs" th:href="@{/ventas/listar/}+${cliente.Id}">Comprar</a>
-        </div>
-    </form>
-
-    <div class="container">
-    <form th:action="@{/ventas/form}" th:object="${ventas}" method="post">
 
         <table class="table text-center">
             <thead>
@@ -60,68 +50,65 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="venta: ${ventas}">
-                    <td th:text="${venta.subtotal}"></td>
-                    <td th:text="${venta.total}"></td>
-                    
+                <tr th:each="producto: ${productos}">
+                    <td th:text="${producto.id}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.Descripcion}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td th:text="${producto.Unidades}"></td>            
                 </tr>
             </tbody>
-
         </table>
-    <div class="form-control">
-          <label class="col-sm-2 col-form-label">subtotal</label>
-                <div class="col-sm-6">
-                   <input type="text" th:field="*{subtotal}" class="form-control">
-       </div>
-        <div class="form-control">
-            <label class="col-sm-2 col-form-label">total</label>
+
+    <div>
+
+    <form th:object="${detalle}" th:action="@{/ventas/añadir}" method="post" style="border-color: black; border: 2px; border-style: solid; padding: 20px;">
+        <div class="form-group">
             <div class="col-sm-6">
-                <input type="text" th:field="*{total}" class="form-control">
+                <p>Ingrese el id del producto que desea comprar y luego presione enter
+                <input autofocus autocomplete="off" type="text" th:field="*{id}" id="id" class="form-control">
             </div>
         </div>
-        <div class="form-control">
-            <div class="col-sm-6">
-                <input type="submit" th:value="${valor}" class="btn btn-primary">
-            </div>
-        </div>       
-
-        
-
-       <!-- <table class="table text-center">
-            <tr>
-                <td>Nombre</td>
-                <td>
-                    <input type="text" th:field="*{nombre}" class="form-control">
-                </td>
-            </tr>
-            <tr>
-                <td>Apellido</td>
-                <td>
-                    <input type="text" th:field="*{apellido}" class="form-control">
-                </td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td>
-                    <input type="email" th:field="*{email}" class="form-control">
-                </td>
-            </tr>
-            <tr>
-                <td>Fecha</td>
-                <td>
-                    <input type="date" th:field="*{CreateAt}" class="form-control">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Crear Cliente" class="btn btn-primary">
-                </td>
-            </tr>
-            <input type="hidden" th:field="*{id}">
-        </table>-->
-
     </form>
-</div>
+    <h1 th:text="${'Total: ' + total}"></h1>
+    <form th:action="@{/ventas/finalizar}" method="post" style="border-color: black; border: 2px; border-style: solid; padding: 20px;">
+        <div class="form-group">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-xs" id="Aux5" style="border-color: black;">Terminar</button>
+                <a class="btn btn-xs" th:href="@{/ventas/limpiar}" id="Aux5" style="border-color: black;">Cancelar</a>
+            </div>
+        </div>
+    </form>
+
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th>Quitar de la lista</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="detalle, iterador: ${session.canasta}">
+                <th th:text="${detalle.id}"></th>
+                <th th:text="${detalle.productoMap.nombre}"></th>
+                <th th:text="${detalle.productoMap.descripcion}"></th>
+                <th th:text="${detalle.Cantidad}"></th>
+                <th th:text="${detalle.productoMap.precio}"></th>
+                <th th:text="${detalle.valorVenta * detalle.Cantidad}"></th>
+                <th>
+                    <form th:action="@{/ventas/Quitar/} + ${iterador.index}" method="post">
+                        <button type="submit" class="btn btn-xs" id="Aux5" style="border-color: black;">Quitar</button>
+                    </form>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 </body>
 
 </html>

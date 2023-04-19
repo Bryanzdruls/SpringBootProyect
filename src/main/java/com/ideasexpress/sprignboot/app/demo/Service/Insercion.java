@@ -76,6 +76,8 @@ public class Insercion {
         productoDaoImp.save(producto2); 
         productoDaoImp.save(producto3);
         productoDaoImp.save(producto4);
+        productoDaoImp.save(producto5);
+
         //se crea el detalle
         Detalle detalle1 = new Detalle(1,producto1.getPrecio()*producto1.getUnidades(),producto1);
         Detalle detalle2 = new Detalle(2,producto2.getPrecio()*producto2.getUnidades(),producto2);
