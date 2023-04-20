@@ -60,6 +60,7 @@
 
     <div>
 
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}" th:text="${mensaje}" class="alert"> </div>
     <form  th:object="${detalle}" th:action="@{/ventas/añadir}" method="post" style="background-color: greenyellow; border-color: black; border: 2px; border-style: solid; padding: 20px;">
         <div class="form-group" >
             <div class="col-sm-6" style="background-color: white; border-radius: 3px;">
