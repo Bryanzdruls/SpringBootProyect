@@ -1,4 +1,4 @@
-/*package com.ideasexpress.sprignboot.app.demo.Config;
+package com.ideasexpress.sprignboot.app.demo.Config;
 
 import java.util.Optional;
 
@@ -26,4 +26,3 @@ public class UserInfoUserDetailsService implements UserDetailsService{
     }
 
 }
-*/

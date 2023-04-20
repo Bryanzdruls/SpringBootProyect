@@ -26,20 +26,18 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Productos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/ventas/ventasGeneral}">Ventas</a>
-                    </li>
+                    <div style="padding-left: 950px;">
+                        <form th:action="@{/logout}" class="d-flex" role="search">
+                            <button class="btn btn-outline-danger" type="submit" style="border-color:red; margin-left: 8px;">Cerrar Sesión</button>
+                        </form>
+                    </div>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <h1 th:text="${titulo}" class="text-center"></h1>
-    <br>
-
-
-
-        <table class="table text-center">
+    <h1 style="background-color: aqua;border-radius: 50px;"th:text="${titulo}" class="text-center"></h1>
+        <table style = "background-color: pink;"class="table text-center">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -62,10 +60,10 @@
 
     <div>
 
-    <form th:object="${detalle}" th:action="@{/ventas/añadir}" method="post" style="border-color: black; border: 2px; border-style: solid; padding: 20px;">
-        <div class="form-group">
-            <div class="col-sm-6">
-                <p>Ingrese el id del producto que desea comprar y luego presione enter
+    <form  th:object="${detalle}" th:action="@{/ventas/añadir}" method="post" style="background-color: greenyellow; border-color: black; border: 2px; border-style: solid; padding: 20px;">
+        <div class="form-group" >
+            <div class="col-sm-6" style="background-color: white; border-radius: 3px;">
+                <p style="color:black; ">Ingrese el id del producto que desea comprar y luego presione enter</p>
                 <input autofocus autocomplete="off" type="text" th:field="*{id}" id="id" class="form-control">
             </div>
         </div>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://wwww.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text=${titulo}>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body id="fondo">
+
+    <div class="container" id="Aux2">
+        <div class="row text-center" , style="padding: 20px;">
+            <h1  style="color: white;"th:text=${titulo}  id="Aux3"></h1>
+        </div>
+        <div th:if="${param.error}" class="alert alert-info">
+            Usuario o contraseña invalidos
+        </div>
+        <form class="col-12" th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label style="color: white;"class="col-sm-2 col-form-label" id="Aux4">Usuario</label>
+                <div class="col-sm-10" id="Aux4">
+                    <input type="text" class="form-control" name="username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="color: white;" class="col-sm-2 col-form-label" id="Aux4">Contraseña</label>
+                <div class="col-sm-10" id="Aux4">
+                    <input type="password" class="form-control" name="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div id="Aux5">
+                    <input  style="color: white;"class="btn btn-xs" type="submit" value="INGRESAR" id="Aux6">
+                    <a style="color: white;" class="btn btn-xs" th:href="@{/cliente/form}" id="Aux6">REGISTRARSE</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.bundle.min.js" type=""></script>
+</body>
+
+</html>

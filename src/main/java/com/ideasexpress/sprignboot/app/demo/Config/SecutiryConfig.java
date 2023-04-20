@@ -27,8 +27,8 @@ public class SecutiryConfig  {
 
     @Bean
     //authentication
-    public UserDetailsService userDetailsService(PasswordEncoder encoder){
-        UserDetails admin = User.withUsername("brian")
+    public UserDetailsService userDetailsService(){
+        /*UserDetails admin = User.withUsername("brian")
                                 .password(encoder.encode("123"))
                                 .roles("ADMIN")
                                 .build();
@@ -36,19 +36,27 @@ public class SecutiryConfig  {
                                 .password(encoder.encode("123"))
                                 .roles("USER")
                                 .build();
-        return new InMemoryUserDetailsManager(admin,user);
-        //return new UserInfoUserDetailsService();
+        return new InMemoryUserDetailsManager(admin,user);*/
+        return new UserInfoUserDetailsService();
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf().disable().authorizeHttpRequests()
-            .antMatchers( "/cliente/**","cliente/form","/h2-console/**").permitAll()
+            .antMatchers("cliente/form","/h2-console/**").permitAll()
+            .antMatchers("/public/**","/css/**","/js/**","/images/**").permitAll()
+            .antMatchers("/login").permitAll()
             .and()
-            .authorizeHttpRequests().antMatchers("/producto/**").authenticated()
+            .authorizeHttpRequests().antMatchers("/cliente/listar","/producto/**").authenticated()
             .and()
-            .formLogin()
-            .and()
+            .formLogin(login -> login
+                    .loginPage("/login")
+                    .permitAll()
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/cliente/listar")
+            .permitAll())
+            .logout(logout -> logout.logoutSuccessUrl("/login").permitAll())
             .csrf().ignoringAntMatchers("/h2-console/**")
             .and()
             .headers().frameOptions().sameOrigin()
@@ -60,12 +68,14 @@ public class SecutiryConfig  {
         return new BCryptPasswordEncoder();
     }
 
-   /* @Bean
+   @Bean
     public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider authenticationProvider= new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
-    } */
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(userDetailsService());
+        auth.setPasswordEncoder(passwordEncoder());
+
+        return auth;
+    } 
+
 
 }

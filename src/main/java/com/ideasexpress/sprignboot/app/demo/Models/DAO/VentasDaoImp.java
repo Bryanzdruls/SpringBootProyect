@@ -74,6 +74,8 @@ public class VentasDaoImp  implements IVentasDao{
 
     @Override
     public List<Integer> subTotalList(List<Ventas> ventas,List<Detalle> detalles){
+        //if(ventas.isEmpty()) return null;
+        System.out.println("METODO SUBTOTAL");
         int menor=  ventas.stream()
         .mapToInt(venta ->(int)(long)venta.getId())
         .min()
@@ -116,7 +118,7 @@ public class VentasDaoImp  implements IVentasDao{
                                     .sum();
                 System.out.println(sum);
                 //System.out.println(ventas.get(i-1).toString());
-                ventas.get(i-1).setSubtotal(sum);
+                //ventas.get(i-1).setSubtotal(sum);
             }
         }
 

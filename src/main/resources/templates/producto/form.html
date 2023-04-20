@@ -8,9 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title th:text="${titulo}">Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body>
+<body id="fondoSad">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid ">
             <a class="navbar-brand " href="#">Productos</a>
@@ -27,9 +28,11 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Productos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/ventas/ventasGeneral}">Ventas</a>
-                        </li>
+                        <div style="padding-left: 950px;">
+                            <form th:action="@{/logout}" class="d-flex" role="search">
+                                <button class="btn btn-outline-danger" type="submit" style="border-color:red; margin-left: 8px;">Cerrar Sesión</button>
+                            </form>
+                        </div>
                     </ul>
             </div>
         </div>

@@ -11,11 +11,35 @@
     <title th:text="${tituloP}">Document</title>
 </head>
 <body>
-    <div th:text="${venta}"></div>
-    <div th:text="${cliente}"></div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid ">
+            <a class="navbar-brand " href="#">Ventas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cliente/listar}">cliente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#" th:href="@{/producto/listar}">Productos</a>
+                    </li>
+                    <div style="padding-left: 950px;">
+                        <form th:action="@{/logout}" class="d-flex" role="search">
+                            <button class="btn btn-outline-danger" type="submit" style="border-color:red; margin-left: 8px;">Cerrar Sesión</button>
+                        </form>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
 <div style="flex: auto;">
-    <h1 style="align-self: center;"th:text="${tituloP}"></h1>
-    <table class="table text-center">
+    <h1 style="align-self: center; background-color: black; color: azure;"th:text="${tituloP}"></h1>
+    <table class="table text-center" style="background-color: aquamarine;">
         <thead>
             <tr>
                 <th scope="col">id venta</th>
@@ -28,7 +52,7 @@
         </thead>
         
         <tbody>
-            <tr th:each="venta: ${ventas}">
+            <tr th:each="venta: ${ventas}" style="background-color: aquamarine;">
                 <td th:text="${venta.id}"></td>
                 <td th:text="${venta.cliente.id}"></td>               
                 <td th:text="${venta.subtotal}"></td>
@@ -42,13 +66,13 @@
 </div>
 
 
-<h1>DETALLES</h1>
+<h1 style="background-color: black; color: azure;" >DETALLES</h1>
 
 
 
 <h1></h1>
 <div style="flex:auto">
-    <table class="table text-center">
+    <table class="table text-center" style="background-color: aquamarine;">
         <thead>
             <tr>
                 <th scope="col">id Detalle</th>
@@ -74,9 +98,9 @@
         </tbody>
     </table>
 
-    <h1>FACTURA</h1>
+    <h1 style="background-color: black; color: azure;">FACTURA</h1>
     <div>
-        <table class="table text-center" style="float:right; margin: left 20px;">
+        <table class="table text-center" style="float:right; margin: left 20px; background-color: darkgray;" >
             <thead>
                 <tr>
                     <th scope="col">subtotal</th>

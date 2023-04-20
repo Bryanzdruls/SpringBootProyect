@@ -70,7 +70,7 @@ public class VentasController {
         //ya sabemos que cliente es
 
         
-        ventasDao.subTotalList(ventasDao.findOneCliente(id), detalleDao.findVentas(id));
+        //ventasDao.subTotalList(ventasDao.findOneCliente(id), detalleDao.findVentas(id));
         
         model.addAttribute("tituloP", "Ventas");
         model.addAttribute("ventas", ventasDao.findOneCliente(id));
@@ -198,8 +198,8 @@ public class VentasController {
     public String terminarVenta(HttpServletRequest request, RedirectAttributes redirectAttrs) 
     {
         System.out.println("SI ENTRA");
+        int subtotal=0;
         ArrayList<Detalle> canasta = this.getCanasta(request);
-        Detalle det = new Detalle();
         // Si no hay carrito o está vacío, regresamos inmediatamente
 
         if (canasta == null || canasta.size() <= 0) {
@@ -233,9 +233,10 @@ public class VentasController {
     
             Detalle detalleProducto = new Detalle(productoParaVender.getCantidad(), productoParaVender.getValorVenta(), p, v);
             // Y lo guardamos
-            det = detalleProducto;
             v.setFecha(new Date());
-
+            subtotal =subtotal +(productoParaVender.getValorVenta() * productoParaVender.getCantidad());
+            v.setSubtotal(subtotal);
+            v.setTotal(v.getSubtotal()+4000);
             /*detalleProducto.setVenta(v);
             v.detallesDeVenta(detalleProducto);*/
             v.setCliente(cliente);

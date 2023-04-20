@@ -1,0 +1,33 @@
+body
+{
+  background:  url("/src/main/resources/images/kaneki.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+#fondo{
+  background-image: url("/images/kaneki.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  background-position: center;
+  background-attachment: fixed;
+}
+#fondoSad{
+  background-image: url("/src/main/resources/static/images/kanekiSad.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  background-position: center;
+  background-attachment: fixed;
+
+}
+#prueba{
+  text-align: end;
+}
+.prueba{
+  color: aqua;
+}
